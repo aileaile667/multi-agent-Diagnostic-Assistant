@@ -53,9 +53,23 @@ Extract the following fields as a JSON object:
 
 Rules:
 - If a field is not mentioned, use reasonable defaults or null.
+- For symptom/allergy severity, use "moderate" when severity is unknown; never return null.
 - Age must be a positive integer. If unclear, estimate from context.
 - Always identify the chief complaint even if not explicitly stated.
 - Return ONLY valid JSON, no markdown fences."""
+
+
+def _sanitize_patient_data(patient_data: dict) -> dict:
+    """Normalize occasional LLM nulls into model defaults before validation."""
+    for symptom in patient_data.get("symptoms") or []:
+        if isinstance(symptom, dict) and not symptom.get("severity"):
+            symptom["severity"] = "moderate"
+
+    for allergy in patient_data.get("allergies") or []:
+        if isinstance(allergy, dict) and not allergy.get("severity"):
+            allergy["severity"] = "moderate"
+
+    return patient_data
 
 
 def intake_agent(state) -> dict:
@@ -95,7 +109,7 @@ def intake_agent(state) -> dict:
         if content.startswith("```"):
             content = content.split("\n", 1)[1].rsplit("```", 1)[0].strip()
 
-        patient_data = json.loads(content)
+        patient_data = _sanitize_patient_data(json.loads(content))
         patient = PatientInfo(**patient_data)
         patient_dict = patient.model_dump(mode="json")
 

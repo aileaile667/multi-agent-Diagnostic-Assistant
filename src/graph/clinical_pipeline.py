@@ -18,14 +18,16 @@ from ..agents.treatment_agent import treatment_agent
 from ..agents.coding_agent import coding_agent
 from ..agents.audit_agent import audit_agent
 
+MAX_DIAGNOSIS_RETRIES = 2
+
 
 def _route_after_diagnosis(state: ClinicalState) -> str:
     """
     Conditional edge after Diagnosis Agent.
-    If the agent determines more patient info is needed, route back to Intake.
-    Otherwise proceed to Treatment.
+    If the diagnosis needs more info, route back to Intake at most twice.
+    After that, continue with the best available diagnosis to avoid loops.
     """
-    if state.needs_more_info:
+    if state.needs_more_info and state.diagnosis_retry_count <= MAX_DIAGNOSIS_RETRIES:
         return "intake"
     return "treatment"
 

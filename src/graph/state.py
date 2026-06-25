@@ -56,6 +56,10 @@ class ClinicalState(BaseModel):
         default=False,
         description="Flag set by DiagnosisAgent when more info is needed",
     )
+    diagnosis_retry_count: int = Field(
+        default=0,
+        description="Number of times DiagnosisAgent requested more info",
+    )
 
     # ---- Treatment Agent output ----
     treatment_plan: Optional[dict] = Field(

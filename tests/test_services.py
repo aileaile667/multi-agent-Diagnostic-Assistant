@@ -5,6 +5,7 @@ from src.services.icd10_service import lookup_icd10, search_icd10_by_text, get_d
 from src.services.drug_interaction import check_interactions, check_allergy_contraindication
 from src.services.hipaa_service import detect_phi, deidentify_text, hash_identifier
 from src.services.graphrag_service import GraphRAGService
+from src.agents.intake_agent import _sanitize_patient_data
 
 
 class TestICD10Service:
@@ -83,9 +84,27 @@ class TestGraphRAGService:
         assert len(results) > 0
         disease_names = [r["disease"] for r in results]
         assert "Pneumonia" in disease_names
+        pneumonia = next(r for r in results if r["disease"] == "Pneumonia")
+        assert pneumonia["symptom_match_count"] == 2
+        assert set(pneumonia["matching_symptoms"]) == {"fever", "cough"}
+        assert pneumonia["evidence_paths"]
+        assert pneumonia["source"] == "Built-in GraphRAG fallback"
 
     def test_icd10_lookup(self):
         svc = GraphRAGService()
         result = svc.get_icd10("Pneumonia")
         assert result is not None
         assert result["code"] == "J18.9"
+
+
+class TestIntakeSanitization:
+    def test_null_severity_defaults_to_moderate(self):
+        data = {
+            "symptoms": [{"name": "fever", "severity": None}],
+            "allergies": [{"substance": "penicillin", "severity": None}],
+        }
+
+        result = _sanitize_patient_data(data)
+
+        assert result["symptoms"][0]["severity"] == "moderate"
+        assert result["allergies"][0]["severity"] == "moderate"

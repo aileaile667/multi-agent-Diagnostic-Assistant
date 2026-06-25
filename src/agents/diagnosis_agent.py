@@ -16,6 +16,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
 from ..config.settings import get_settings
+from ..services.graphrag_service import get_graphrag_service
 
 logger = structlog.get_logger(__name__)
 
@@ -54,6 +55,40 @@ Rules:
 - Return ONLY valid JSON, no markdown fences."""
 
 
+def _extract_symptom_names(patient_info: dict) -> list[str]:
+    symptoms = patient_info.get("symptoms", [])
+    names = []
+    if isinstance(symptoms, list):
+        for symptom in symptoms:
+            if isinstance(symptom, str):
+                names.append(symptom)
+            elif isinstance(symptom, dict):
+                value = symptom.get("name") or symptom.get("symptom") or symptom.get("description")
+                if value:
+                    names.append(str(value))
+    return names
+
+
+def _format_graphrag_context(candidates: list[dict]) -> str:
+    if not candidates:
+        return "No matching diseases were found in the lightweight GraphRAG knowledge graph."
+
+    lines = []
+    for candidate in candidates[:10]:
+        matching = ", ".join(candidate.get("matching_symptoms") or [])
+        paths = "; ".join(candidate.get("evidence_paths") or [])
+        lines.append(
+            "- {disease} (ICD-10: {icd10}, matched symptoms: {count}; symptoms: {symptoms}; evidence: {paths})".format(
+                disease=candidate.get("disease", ""),
+                icd10=candidate.get("icd10_code", "") or "unknown",
+                count=candidate.get("symptom_match_count", 0),
+                symptoms=matching or "none",
+                paths=paths or "none",
+            )
+        )
+    return "\n".join(lines)
+
+
 def diagnosis_agent(state) -> dict:
     """
     LangGraph节点：根据患者信息生成鉴别诊断。
@@ -67,6 +102,7 @@ def diagnosis_agent(state) -> dict:
         return {
             "diagnosis": None,
             "needs_more_info": True,
+            "diagnosis_retry_count": state.diagnosis_retry_count + 1,
             "current_agent": "diagnosis",
             "errors": state.errors + ["No patient info available for diagnosis"],
         }
@@ -82,11 +118,30 @@ def diagnosis_agent(state) -> dict:
     )
 
     patient_summary = json.dumps(patient_info, indent=2, ensure_ascii=False)
+    symptom_names = _extract_symptom_names(patient_info)
+    graphrag_candidates = []
+    graphrag_source = "Built-in GraphRAG fallback"
+    try:
+        graphrag = get_graphrag_service()
+        graphrag_candidates = graphrag.find_diseases_by_symptoms(symptom_names)
+        if graphrag_candidates:
+            graphrag_source = graphrag_candidates[0].get("source", graphrag_source)
+    except Exception as e:
+        logger.warning("diagnosis_agent.graphrag_unavailable", error=str(e))
+
+    graphrag_context = _format_graphrag_context(graphrag_candidates)
 
     messages = [
         SystemMessage(content=DIAGNOSIS_SYSTEM_PROMPT),
         HumanMessage(
-            content=f"Patient information:\n\n{patient_summary}\n\nProvide your differential diagnosis."
+            content=(
+                f"Patient information:\n\n{patient_summary}\n\n"
+                f"Lightweight GraphRAG candidate diseases:\n{graphrag_context}\n\n"
+                "Use the GraphRAG candidates as supporting evidence when clinically appropriate, "
+                "but do not limit the diagnosis to this list. Include the GraphRAG source in "
+                f"knowledge_sources when used: {graphrag_source}.\n\n"
+                "Provide your differential diagnosis."
+            )
         ),
     ]
 
@@ -98,6 +153,13 @@ def diagnosis_agent(state) -> dict:
 
         diagnosis_data = json.loads(content)
         needs_more = diagnosis_data.pop("needs_more_info", False)
+        diagnosis_retry_count = state.diagnosis_retry_count + 1 if needs_more else 0
+        knowledge_sources = diagnosis_data.get("knowledge_sources")
+        if not isinstance(knowledge_sources, list):
+            knowledge_sources = [str(knowledge_sources)] if knowledge_sources else []
+            diagnosis_data["knowledge_sources"] = knowledge_sources
+        if graphrag_candidates and graphrag_source not in knowledge_sources:
+            knowledge_sources.append(graphrag_source)
 
         logger.info(
             "diagnosis_agent.success",
@@ -106,6 +168,7 @@ def diagnosis_agent(state) -> dict:
         return {
             "diagnosis": diagnosis_data,
             "needs_more_info": needs_more,
+            "diagnosis_retry_count": diagnosis_retry_count,
             "current_agent": "diagnosis",
         }
     except json.JSONDecodeError as e:
