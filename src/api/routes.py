@@ -9,7 +9,11 @@ Endpoints:
 """
 
 from __future__ import annotations
+import json
+from collections.abc import Iterator
+
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
@@ -57,6 +61,100 @@ class DDICheckRequest(BaseModel):
     current_drugs: list[str] = Field(default_factory=list, description="Patient's current medications")
 
 
+STAGE_PAYLOAD_KEYS = {
+    "intake": "patient_info",
+    "diagnosis": "diagnosis",
+    "treatment": "treatment_plan",
+    "coding": "coding_result",
+    "audit": "audit_result",
+}
+
+
+def _sse_message(event: dict) -> str:
+    return f"data: {json.dumps(event, default=str)}\n\n"
+
+
+def _coerce_chunk_state(chunk: object) -> tuple[str | None, dict]:
+    if not isinstance(chunk, dict) or not chunk:
+        return None, {}
+
+    for stage in STAGE_PAYLOAD_KEYS:
+        if stage in chunk:
+            value = chunk[stage]
+            return stage, value if isinstance(value, dict) else {}
+
+    return None, chunk
+
+
+def iter_analyze_events(req: AnalyzeRequest) -> Iterator[dict]:
+    """
+    Yield Server-Sent Event payloads for the clinical pipeline.
+
+    The compiled LangGraph stream emits one chunk per executed node. Each chunk
+    is converted into the stable front-end protocol used by the Vue dashboard.
+    """
+    pipeline = get_pipeline()
+    final_state: dict = {}
+
+    try:
+        for chunk in pipeline.stream(
+            {"raw_input": req.patient_description},
+            config={
+                "configurable": {"thread_id": req.thread_id},
+                "recursion_limit": 10,
+            },
+        ):
+            stage, state = _coerce_chunk_state(chunk)
+            if stage is None:
+                continue
+
+            yield {
+                "thread_id": req.thread_id,
+                "stage": stage,
+                "status": "started",
+                "payload": {},
+                "errors": [],
+            }
+
+            final_state.update(state)
+            payload_key = STAGE_PAYLOAD_KEYS[stage]
+            yield {
+                "thread_id": req.thread_id,
+                "stage": stage,
+                "status": "completed",
+                "payload": {payload_key: state.get(payload_key)},
+                "errors": state.get("errors", []),
+            }
+
+        yield {
+            "thread_id": req.thread_id,
+            "stage": "done",
+            "status": "completed",
+            "payload": AnalyzeResponse(
+                patient_info=final_state.get("patient_info"),
+                diagnosis=final_state.get("diagnosis"),
+                treatment_plan=final_state.get("treatment_plan"),
+                coding_result=final_state.get("coding_result"),
+                audit_result=final_state.get("audit_result"),
+                errors=final_state.get("errors", []),
+            ).model_dump(),
+            "errors": final_state.get("errors", []),
+        }
+    except Exception as e:
+        yield {
+            "thread_id": req.thread_id,
+            "stage": "error",
+            "status": "failed",
+            "payload": {},
+            "errors": [f"Pipeline error: {str(e)}"],
+        }
+
+
+def sse_analyze_messages(req: AnalyzeRequest) -> Iterator[str]:
+    for event in iter_analyze_events(req):
+        yield _sse_message(event)
+
+
 # ---- Endpoints ----
 
 @router.post("/clinical/analyze", response_model=AnalyzeResponse)
@@ -91,6 +189,16 @@ async def analyze_patient(req: AnalyzeRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Pipeline error: {str(e)}")
+
+
+@router.post("/clinical/analyze/stream")
+async def stream_analyze_patient(req: AnalyzeRequest):
+    """Stream pipeline progress and final results as Server-Sent Events."""
+    return StreamingResponse(
+        sse_analyze_messages(req),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 @router.post("/clinical/icd10/search")

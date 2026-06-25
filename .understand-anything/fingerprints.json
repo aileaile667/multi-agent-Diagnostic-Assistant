@@ -1,0 +1,3097 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "483df57fc781b4d223843855b291012ef4fd6a5f",
+  "generatedAt": "2026-05-30T07:36:12.875Z",
+  "files": {
+    ".env.example": {
+      "filePath": ".env.example",
+      "contentHash": "470068ccda55380eda5e08e30429286258f1989821ca51e3f83c25a4137b8985",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": true
+    },
+    "data/sample_patients.json": {
+      "filePath": "data/sample_patients.json",
+      "contentHash": "20f8c352809e3e5fd548549ae3a263dc1fd8a15a96fa558b5a3e7281df8a5490",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "docker-compose.yml": {
+      "filePath": "docker-compose.yml",
+      "contentHash": "b695db343c184cfd9e545a8ab8bc6b12e535bfce3f5aab32d472448580079a9a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    "Dockerfile": {
+      "filePath": "Dockerfile",
+      "contentHash": "999df99712cf3beda70a13b0f04e8ef16e7ce530d6e6722482f34ed4b5f3a292",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "docs/00-项目概览.md": {
+      "filePath": "docs/00-项目概览.md",
+      "contentHash": "6d90972d29d57b2fbf23c2ffb4455b2bac05ced464aa24532605e0e1e59ea851",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 375,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-环境搭建指南.md": {
+      "filePath": "docs/01-环境搭建指南.md",
+      "contentHash": "402985943c25565224bfb0f63c0e7e7ec4fecb2da66b446a313d4d60247b8865",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 676,
+      "hasStructuralAnalysis": true
+    },
+    "docs/02-架构设计详解.md": {
+      "filePath": "docs/02-架构设计详解.md",
+      "contentHash": "aa97f12e2667b05ba1dc589f4825d2b835c09a75c1a3c253d129342d30140d65",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 579,
+      "hasStructuralAnalysis": true
+    },
+    "docs/03-Agent设计原理.md": {
+      "filePath": "docs/03-Agent设计原理.md",
+      "contentHash": "7ffda12a680e6ca899bb2bb02ece7fabca98977f8da2dc42a4424d05a030700c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 652,
+      "hasStructuralAnalysis": true
+    },
+    "docs/04-GraphRAG知识图谱.md": {
+      "filePath": "docs/04-GraphRAG知识图谱.md",
+      "contentHash": "b9eb61643045e01a885c754eaf25197432686166724136515774127ccf41748d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 518,
+      "hasStructuralAnalysis": true
+    },
+    "docs/05-FHIR-API集成.md": {
+      "filePath": "docs/05-FHIR-API集成.md",
+      "contentHash": "3a9067ad95ec7f8169df927a35291037483743e203c4776a352ec90f4b3460cc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 611,
+      "hasStructuralAnalysis": true
+    },
+    "docs/06-HIPAA合规设计.md": {
+      "filePath": "docs/06-HIPAA合规设计.md",
+      "contentHash": "42a069801f547305622fa240b6c66faf07fa5b9c8c99b49f2839dae5c0507673",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 478,
+      "hasStructuralAnalysis": true
+    },
+    "docs/07-部署运维指南.md": {
+      "filePath": "docs/07-部署运维指南.md",
+      "contentHash": "fa8dfede3d9ae26d0afbab7dab23448dc60b5e13e53db08a42653fd4fe121d3c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1561,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/.env.example": {
+      "filePath": "frontend/.env.example",
+      "contentHash": "0907b3e6ce5b12ebf94f8c527a6ce0bf1b1c213eb59b94f54209b47e9c1d3f2b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/index.html": {
+      "filePath": "frontend/index.html",
+      "contentHash": "4e5f5ff90a8bbe0511729045513d296c21e99124b5737bf0b62ccec4c2fab9d3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/package.json": {
+      "filePath": "frontend/package.json",
+      "contentHash": "ee36722c4427efe760d0351a52ea5c5007c97c3af3c6168e15e1ea96b3a6cabe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/api/clinicalApi.test.ts": {
+      "filePath": "frontend/src/api/clinicalApi.test.ts",
+      "contentHash": "f0a7c4bb553ebd2722dd4189402aaf8b67fd8c8bc689f76f81db8472f04989cc",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it",
+            "vi"
+          ]
+        },
+        {
+          "source": "@/api/clinicalApi",
+          "specifiers": [
+            "analyze",
+            "searchICD10"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/api/clinicalApi.ts": {
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "contentHash": "32842dc61505f87798f6f4a10a1fc7b751321b124119ad2d7082aa1ee68c6db8",
+      "functions": [
+        {
+          "name": "requestJson",
+          "params": [
+            "path",
+            "options"
+          ],
+          "returnType": "Promise<T>",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "parseSseFrame",
+          "params": [
+            "frame"
+          ],
+          "returnType": "StreamEvent | null",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "analyze",
+          "params": [
+            "request"
+          ],
+          "returnType": "Promise<AnalyzeResponse>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "streamAnalyze",
+          "params": [
+            "request",
+            "onEvent"
+          ],
+          "returnType": "Promise<void>",
+          "exported": true,
+          "lineCount": 43
+        },
+        {
+          "name": "searchICD10",
+          "params": [
+            "query"
+          ],
+          "returnType": "Promise<ICD10SearchResponse>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "getICD10",
+          "params": [
+            "code"
+          ],
+          "returnType": "Promise<ICD10LookupResponse>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "checkDDI",
+          "params": [
+            "newDrugs",
+            "currentDrugs"
+          ],
+          "returnType": "Promise<DDICheckResponse>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "health",
+          "params": [],
+          "returnType": "Promise<HealthResponse>",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/types/clinical",
+          "specifiers": [
+            "AnalyzeRequest",
+            "AnalyzeResponse",
+            "DDICheckResponse",
+            "HealthResponse",
+            "ICD10LookupResponse",
+            "ICD10SearchResponse",
+            "StreamEvent"
+          ]
+        }
+      ],
+      "exports": [
+        "analyze",
+        "streamAnalyze",
+        "searchICD10",
+        "getICD10",
+        "checkDDI",
+        "health"
+      ],
+      "totalLines": 122,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/App.vue": {
+      "filePath": "frontend/src/App.vue",
+      "contentHash": "6e8c7c1305b7a80dd957c4386ab815afcdfad9029f8fd5a6dd1c81a8b5a31772",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 93,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/components/JsonPreview.vue": {
+      "filePath": "frontend/src/components/JsonPreview.vue",
+      "contentHash": "0a053be55dc73c37b7515ab5e3d0c55f1021562c0be37650897bf3f667b57ab7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/components/ResultsPanel.test.ts": {
+      "filePath": "frontend/src/components/ResultsPanel.test.ts",
+      "contentHash": "b28a4a83a78ac064d16ab517e3b4e3789c1835a297e70df201f1f7a527e8bda7",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@vue/test-utils",
+          "specifiers": [
+            "mount"
+          ]
+        },
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "@/components/ResultsPanel.vue",
+          "specifiers": [
+            "ResultsPanel"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/components/ResultsPanel.vue": {
+      "filePath": "frontend/src/components/ResultsPanel.vue",
+      "contentHash": "87d63b769e3069ecedf973aab0d5a04659f3a194277a7019058d4727282f40c6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 149,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/components/StageProgress.vue": {
+      "filePath": "frontend/src/components/StageProgress.vue",
+      "contentHash": "3525f7094a5e4d546d98ddeccea0d469653b7cbd173e4f3c8762f02d7f94041a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/main.ts": {
+      "filePath": "frontend/src/main.ts",
+      "contentHash": "ba984eae79072baf62411b9256a422747a604086ab18f8b3ac44443f12026aaa",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vue",
+          "specifiers": [
+            "createApp"
+          ]
+        },
+        {
+          "source": "pinia",
+          "specifiers": [
+            "createPinia"
+          ]
+        },
+        {
+          "source": "@/App.vue",
+          "specifiers": [
+            "App"
+          ]
+        },
+        {
+          "source": "@/router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "@/styles.css",
+          "specifiers": []
+        }
+      ],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/router/index.ts": {
+      "filePath": "frontend/src/router/index.ts",
+      "contentHash": "86e19f1140b37c8f3801bb7a9863d91e95ce0750f255d8497f12e1422fd61b47",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vue-router",
+          "specifiers": [
+            "createRouter",
+            "createWebHistory"
+          ]
+        },
+        {
+          "source": "@/views/AnalysisView.vue",
+          "specifiers": [
+            "AnalysisView"
+          ]
+        },
+        {
+          "source": "@/views/DDIView.vue",
+          "specifiers": [
+            "DDIView"
+          ]
+        },
+        {
+          "source": "@/views/HealthView.vue",
+          "specifiers": [
+            "HealthView"
+          ]
+        },
+        {
+          "source": "@/views/ICD10View.vue",
+          "specifiers": [
+            "ICD10View"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/stores/analysisStore.test.ts": {
+      "filePath": "frontend/src/stores/analysisStore.test.ts",
+      "contentHash": "b514d840165104673881838081f055e3ad57dd26753a22dae6205e1e7794f02c",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "pinia",
+          "specifiers": [
+            "createPinia",
+            "setActivePinia"
+          ]
+        },
+        {
+          "source": "vitest",
+          "specifiers": [
+            "beforeEach",
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "@/stores/analysisStore",
+          "specifiers": [
+            "useAnalysisStore"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/stores/analysisStore.ts": {
+      "filePath": "frontend/src/stores/analysisStore.ts",
+      "contentHash": "5136934e2c63f1bc9640d203a7a75502c0013b982f24b8f2b6e84c6975e7cb98",
+      "functions": [
+        {
+          "name": "createStageStatuses",
+          "params": [],
+          "returnType": "Record<AgentStage, StageStatus>",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "mergePayload",
+          "params": [
+            "result",
+            "payload"
+          ],
+          "returnType": "AnalyzeResponse",
+          "exported": false,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "pinia",
+          "specifiers": [
+            "defineStore"
+          ]
+        },
+        {
+          "source": "@/api/clinicalApi",
+          "specifiers": [
+            "analyze",
+            "streamAnalyze"
+          ]
+        },
+        {
+          "source": "@/types/clinical",
+          "specifiers": [
+            "AgentStage",
+            "AnalyzeResponse",
+            "StageStatus",
+            "StreamEvent"
+          ]
+        }
+      ],
+      "exports": [
+        "sampleCase",
+        "agentStages",
+        "useAnalysisStore"
+      ],
+      "totalLines": 160,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/styles.css": {
+      "filePath": "frontend/src/styles.css",
+      "contentHash": "889c3bfa6691c4668c170d3c39b405663dd6106ca3f402dc361ed85129e56281",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 482,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/test/setup.ts": {
+      "filePath": "frontend/src/test/setup.ts",
+      "contentHash": "82bc56c93ae5f68bbf217f150ac31a3d2eb5ee6bf4a9d703f7b5bed1ceed7802",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "afterEach",
+            "vi"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/types/clinical.ts": {
+      "filePath": "frontend/src/types/clinical.ts",
+      "contentHash": "2998a95cb36b46914435dccda9baae482060785f6c5e6f1c2eec1358f88d674e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 72,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/views/AnalysisView.vue": {
+      "filePath": "frontend/src/views/AnalysisView.vue",
+      "contentHash": "932a06bc71d1a010f9fc94c1abbaea1e12e327d4a57beaecbaca20fac29d6268",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 98,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/views/DDIView.vue": {
+      "filePath": "frontend/src/views/DDIView.vue",
+      "contentHash": "329b60f6566b69eeee048368b2e340facf5eb783f5d1b81eefcd07ee0d861103",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 95,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/views/HealthView.vue": {
+      "filePath": "frontend/src/views/HealthView.vue",
+      "contentHash": "b2be214232cb374bb1c92617a3a3f92f1062c3b78219585c858629fd4ea0e95a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 73,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/views/ICD10View.vue": {
+      "filePath": "frontend/src/views/ICD10View.vue",
+      "contentHash": "d5f2b943b440e041a72b4e846b5be9f242fe2ca4f4e55139cf96aa6d600b4fa9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 122,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/vite-env.d.ts": {
+      "filePath": "frontend/src/vite-env.d.ts",
+      "contentHash": "5144f260cedc593f9e69abb48a4daba0751f7a328ba00188375c890498242d78",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/tsconfig.json": {
+      "filePath": "frontend/tsconfig.json",
+      "contentHash": "9f8e71c0f01729d5dae50a9e17e4b135b36d7b70afe4ad556c0d086b7bf853de",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/tsconfig.node.json": {
+      "filePath": "frontend/tsconfig.node.json",
+      "contentHash": "4a00d5b6c2ed51c0cf61cb278d0f8548835e36016ba44d7cac75b465bcf39752",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/vite.config.d.ts": {
+      "filePath": "frontend/vite.config.d.ts",
+      "contentHash": "4b96dd19fd2949d28ce80e913412b0026dc421e5bf6c31d87c7b5eb11b5753b4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/vite.config.js": {
+      "filePath": "frontend/vite.config.js",
+      "contentHash": "7bea38694a0413c33790c08a4db44dc83e4004fc80bd5fd1ac2f2df12c7f0fe6",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:url",
+          "specifiers": [
+            "fileURLToPath",
+            "URL"
+          ]
+        },
+        {
+          "source": "@vitejs/plugin-vue",
+          "specifiers": [
+            "vue"
+          ]
+        },
+        {
+          "source": "vite",
+          "specifiers": [
+            "defineConfig"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/vite.config.ts": {
+      "filePath": "frontend/vite.config.ts",
+      "contentHash": "268bec5df880771e74be3eb5c862f2d8d6380ca5429380e95cd82f1d159539e0",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:url",
+          "specifiers": [
+            "fileURLToPath",
+            "URL"
+          ]
+        },
+        {
+          "source": "@vitejs/plugin-vue",
+          "specifiers": [
+            "vue"
+          ]
+        },
+        {
+          "source": "vite",
+          "specifiers": [
+            "defineConfig"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/vitest.config.d.ts": {
+      "filePath": "frontend/vitest.config.d.ts",
+      "contentHash": "4b96dd19fd2949d28ce80e913412b0026dc421e5bf6c31d87c7b5eb11b5753b4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/vitest.config.js": {
+      "filePath": "frontend/vitest.config.js",
+      "contentHash": "1587fa18fdb9c5abfb5c47a3c0a7f9010b201cb13e182bec9e5af21e6d58c4c5",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:url",
+          "specifiers": [
+            "fileURLToPath",
+            "URL"
+          ]
+        },
+        {
+          "source": "@vitejs/plugin-vue",
+          "specifiers": [
+            "vue"
+          ]
+        },
+        {
+          "source": "vitest/config",
+          "specifiers": [
+            "defineConfig"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/vitest.config.ts": {
+      "filePath": "frontend/vitest.config.ts",
+      "contentHash": "625ae8a42faaa33b44a3219577778f41de3dbf5774cc32470ee744dc1820fa6b",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:url",
+          "specifiers": [
+            "fileURLToPath",
+            "URL"
+          ]
+        },
+        {
+          "source": "@vitejs/plugin-vue",
+          "specifiers": [
+            "vue"
+          ]
+        },
+        {
+          "source": "vitest/config",
+          "specifiers": [
+            "defineConfig"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 18,
+      "hasStructuralAnalysis": true
+    },
+    "README-python.md": {
+      "filePath": "README-python.md",
+      "contentHash": "0160b3f161011d36ef2a5a9e7d63eb507e4d420f7b84283fa8800e17130cfcdf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 98,
+      "hasStructuralAnalysis": true
+    },
+    "requirements.txt": {
+      "filePath": "requirements.txt",
+      "contentHash": "e1553dc815f1bb8ba9a0ddde10901154c7a710deb5dae49dcc731d770571a89a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": false
+    },
+    "resume_project_intro.md": {
+      "filePath": "resume_project_intro.md",
+      "contentHash": "12903a691b9b8f2a3c70aca10611891352878581431c96090f96003f6e3c2209",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/seed_neo4j_kg.py": {
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "contentHash": "a7c347743793547791449af4b3a86fe5ab09c9397aa497f9110ba336230e8e82",
+      "functions": [
+        {
+          "name": "build_seed_rows",
+          "params": [],
+          "returnType": "tuple[list[dict], list[dict], list[dict]]",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "reset_graph",
+          "params": [
+            "session",
+            "batch_size"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "create_constraints",
+          "params": [
+            "session"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "seed_graph",
+          "params": [
+            "session"
+          ],
+          "returnType": "dict[str, int]",
+          "exported": true,
+          "lineCount": 53
+        },
+        {
+          "name": "main",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 59
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "src.config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        },
+        {
+          "source": "src.services.graphrag_service",
+          "specifiers": [
+            "DISEASE_ICD10_MAP",
+            "SYMPTOM_DISEASE_MAP"
+          ]
+        }
+      ],
+      "exports": [
+        "build_seed_rows",
+        "reset_graph",
+        "create_constraints",
+        "seed_graph",
+        "main"
+      ],
+      "totalLines": 199,
+      "hasStructuralAnalysis": true
+    },
+    "src/__init__.py": {
+      "filePath": "src/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/agents/__init__.py": {
+      "filePath": "src/agents/__init__.py",
+      "contentHash": "e128a8527d6cbef1779d9f303a0af22939c0bdcae1431b8a402d94a728ff5fa7",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": ".intake_agent",
+          "specifiers": [
+            "intake_agent"
+          ]
+        },
+        {
+          "source": ".diagnosis_agent",
+          "specifiers": [
+            "diagnosis_agent"
+          ]
+        },
+        {
+          "source": ".treatment_agent",
+          "specifiers": [
+            "treatment_agent"
+          ]
+        },
+        {
+          "source": ".coding_agent",
+          "specifiers": [
+            "coding_agent"
+          ]
+        },
+        {
+          "source": ".audit_agent",
+          "specifiers": [
+            "audit_agent"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/agents/audit_agent.py": {
+      "filePath": "src/agents/audit_agent.py",
+      "contentHash": "133f36253f56e3df23518efae7c4462bd0b437a0cb5131cb63235808ac867415",
+      "functions": [
+        {
+          "name": "_scan_for_phi",
+          "params": [
+            "data"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "_mask_phi",
+          "params": [
+            "data"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "_create_audit_record",
+          "params": [
+            "action",
+            "resource_type",
+            "detail"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "audit_agent",
+          "params": [
+            "state"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 93
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timezone"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "..models.treatment",
+          "specifiers": [
+            "AuditResult",
+            "AuditRecord",
+            "ComplianceCheck"
+          ]
+        }
+      ],
+      "exports": [
+        "_scan_for_phi",
+        "_mask_phi",
+        "_create_audit_record",
+        "audit_agent"
+      ],
+      "totalLines": 173,
+      "hasStructuralAnalysis": true
+    },
+    "src/agents/coding_agent.py": {
+      "filePath": "src/agents/coding_agent.py",
+      "contentHash": "929e57d9e1145df0ae2b2e64f6eb9369583d951fb4a38452ad92296842e921f3",
+      "functions": [
+        {
+          "name": "coding_agent",
+          "params": [
+            "state"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 74
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "langchain_core.messages",
+          "specifiers": [
+            "HumanMessage",
+            "SystemMessage"
+          ]
+        },
+        {
+          "source": "langchain_openai",
+          "specifiers": [
+            "ChatOpenAI"
+          ]
+        },
+        {
+          "source": "..config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        }
+      ],
+      "exports": [
+        "coding_agent"
+      ],
+      "totalLines": 132,
+      "hasStructuralAnalysis": true
+    },
+    "src/agents/diagnosis_agent.py": {
+      "filePath": "src/agents/diagnosis_agent.py",
+      "contentHash": "73679584e1df26cc8e2113521b4357f3a5ab6910811684bde6feff53eb394f3f",
+      "functions": [
+        {
+          "name": "_extract_symptom_names",
+          "params": [
+            "patient_info"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "_format_graphrag_context",
+          "params": [
+            "candidates"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "diagnosis_agent",
+          "params": [
+            "state"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 98
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "langchain_core.messages",
+          "specifiers": [
+            "HumanMessage",
+            "SystemMessage"
+          ]
+        },
+        {
+          "source": "langchain_openai",
+          "specifiers": [
+            "ChatOpenAI"
+          ]
+        },
+        {
+          "source": "..config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        },
+        {
+          "source": "..services.graphrag_service",
+          "specifiers": [
+            "get_graphrag_service"
+          ]
+        }
+      ],
+      "exports": [
+        "_extract_symptom_names",
+        "_format_graphrag_context",
+        "diagnosis_agent"
+      ],
+      "totalLines": 190,
+      "hasStructuralAnalysis": true
+    },
+    "src/agents/intake_agent.py": {
+      "filePath": "src/agents/intake_agent.py",
+      "contentHash": "9b57734359b827c7e512bdb82de75c0ec6f97d7740cfc11e4c030c3bfae1c1cd",
+      "functions": [
+        {
+          "name": "_sanitize_patient_data",
+          "params": [
+            "patient_data"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "intake_agent",
+          "params": [
+            "state"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 60
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "langchain_core.messages",
+          "specifiers": [
+            "HumanMessage",
+            "SystemMessage"
+          ]
+        },
+        {
+          "source": "langchain_openai",
+          "specifiers": [
+            "ChatOpenAI"
+          ]
+        },
+        {
+          "source": "..config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        },
+        {
+          "source": "..models.patient",
+          "specifiers": [
+            "PatientInfo"
+          ]
+        }
+      ],
+      "exports": [
+        "_sanitize_patient_data",
+        "intake_agent"
+      ],
+      "totalLines": 135,
+      "hasStructuralAnalysis": true
+    },
+    "src/agents/treatment_agent.py": {
+      "filePath": "src/agents/treatment_agent.py",
+      "contentHash": "54708721086bd5223161032cba73c96dd626444604a61ec53787130b0da8dda7",
+      "functions": [
+        {
+          "name": "treatment_agent",
+          "params": [
+            "state"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 74
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "langchain_core.messages",
+          "specifiers": [
+            "HumanMessage",
+            "SystemMessage"
+          ]
+        },
+        {
+          "source": "langchain_openai",
+          "specifiers": [
+            "ChatOpenAI"
+          ]
+        },
+        {
+          "source": "..config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        }
+      ],
+      "exports": [
+        "treatment_agent"
+      ],
+      "totalLines": 137,
+      "hasStructuralAnalysis": true
+    },
+    "src/api/__init__.py": {
+      "filePath": "src/api/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/api/main.py": {
+      "filePath": "src/api/main.py",
+      "contentHash": "a498041e7dedb9dd1eead5fa8cef3e4d0a39248e573b94f983fe8d1b87d6530a",
+      "functions": [
+        {
+          "name": "health_check",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "FastAPI"
+          ]
+        },
+        {
+          "source": "fastapi.middleware.cors",
+          "specifiers": [
+            "CORSMiddleware"
+          ]
+        },
+        {
+          "source": ".routes",
+          "specifiers": [
+            "router"
+          ]
+        }
+      ],
+      "exports": [
+        "health_check"
+      ],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "src/api/routes.py": {
+      "filePath": "src/api/routes.py",
+      "contentHash": "37ccb001c874fadba8a51191ac6a5b53f5a33d46163fd15714c3acfd6c176bb2",
+      "functions": [
+        {
+          "name": "_sse_message",
+          "params": [
+            "event"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "_coerce_chunk_state",
+          "params": [
+            "chunk"
+          ],
+          "returnType": "tuple[str | None, dict]",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "iter_analyze_events",
+          "params": [
+            "req"
+          ],
+          "returnType": "Iterator[dict]",
+          "exported": true,
+          "lineCount": 62
+        },
+        {
+          "name": "sse_analyze_messages",
+          "params": [
+            "req"
+          ],
+          "returnType": "Iterator[str]",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "analyze_patient",
+          "params": [
+            "req"
+          ],
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "stream_analyze_patient",
+          "params": [
+            "req"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "search_icd10",
+          "params": [
+            "req"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "get_icd10",
+          "params": [
+            "code"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "check_ddi",
+          "params": [
+            "req"
+          ],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "AnalyzeRequest",
+          "methods": [],
+          "properties": [
+            "patient_description",
+            "thread_id"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "AnalyzeResponse",
+          "methods": [],
+          "properties": [
+            "patient_info",
+            "diagnosis",
+            "treatment_plan",
+            "coding_result",
+            "audit_result",
+            "errors"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "ICD10SearchRequest",
+          "methods": [],
+          "properties": [
+            "query"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "DDICheckRequest",
+          "methods": [],
+          "properties": [
+            "new_drugs",
+            "current_drugs"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "collections.abc",
+          "specifiers": [
+            "Iterator"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "HTTPException"
+          ]
+        },
+        {
+          "source": "fastapi.responses",
+          "specifiers": [
+            "StreamingResponse"
+          ]
+        },
+        {
+          "source": "starlette.concurrency",
+          "specifiers": [
+            "run_in_threadpool"
+          ]
+        },
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field"
+          ]
+        },
+        {
+          "source": "..graph.clinical_pipeline",
+          "specifiers": [
+            "get_pipeline"
+          ]
+        },
+        {
+          "source": "..services.icd10_service",
+          "specifiers": [
+            "search_icd10_by_text",
+            "lookup_icd10",
+            "get_drg_group"
+          ]
+        },
+        {
+          "source": "..services.drug_interaction",
+          "specifiers": [
+            "check_interactions"
+          ]
+        }
+      ],
+      "exports": [
+        "AnalyzeRequest",
+        "AnalyzeResponse",
+        "ICD10SearchRequest",
+        "DDICheckRequest",
+        "_sse_message",
+        "_coerce_chunk_state",
+        "iter_analyze_events",
+        "sse_analyze_messages",
+        "analyze_patient",
+        "stream_analyze_patient",
+        "search_icd10",
+        "get_icd10",
+        "check_ddi"
+      ],
+      "totalLines": 232,
+      "hasStructuralAnalysis": true
+    },
+    "src/config/__init__.py": {
+      "filePath": "src/config/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/config/settings.py": {
+      "filePath": "src/config/settings.py",
+      "contentHash": "2d79ce4d17b9cb1736d8389f83ba35fb2da81d2e13eea79a8e2a8bb4aa7b5430",
+      "functions": [
+        {
+          "name": "get_settings",
+          "params": [],
+          "returnType": "Settings",
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [
+        {
+          "name": "Settings",
+          "methods": [
+            "postgres_dsn",
+            "llm_api_key",
+            "llm_model",
+            "llm_base_url"
+          ],
+          "properties": [
+            "deepseek_api_key",
+            "deepseek_model",
+            "deepseek_base_url",
+            "llm_timeout_seconds",
+            "llm_max_retries",
+            "openai_api_key",
+            "openai_model",
+            "postgres_host",
+            "postgres_port",
+            "postgres_db",
+            "postgres_user",
+            "postgres_password",
+            "neo4j_uri",
+            "neo4j_user",
+            "neo4j_password",
+            "graphrag_use_neo4j",
+            "redis_host",
+            "redis_port",
+            "fhir_server_url",
+            "app_host",
+            "app_port",
+            "log_level"
+          ],
+          "exported": true,
+          "lineCount": 60
+        }
+      ],
+      "imports": [
+        {
+          "source": "pydantic_settings",
+          "specifiers": [
+            "BaseSettings"
+          ]
+        },
+        {
+          "source": "functools",
+          "specifiers": [
+            "lru_cache"
+          ]
+        }
+      ],
+      "exports": [
+        "Settings",
+        "get_settings"
+      ],
+      "totalLines": 72,
+      "hasStructuralAnalysis": true
+    },
+    "src/graph/__init__.py": {
+      "filePath": "src/graph/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/graph/clinical_pipeline.py": {
+      "filePath": "src/graph/clinical_pipeline.py",
+      "contentHash": "48ff77a24e7abade0b04e2730372b1e8835e4b16cb13fdcae01953a58788b1e6",
+      "functions": [
+        {
+          "name": "_route_after_diagnosis",
+          "params": [
+            "state"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "build_clinical_pipeline",
+          "params": [
+            "checkpointer"
+          ],
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "get_pipeline",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "langgraph.graph",
+          "specifiers": [
+            "StateGraph",
+            "END"
+          ]
+        },
+        {
+          "source": "langgraph.checkpoint.memory",
+          "specifiers": [
+            "MemorySaver"
+          ]
+        },
+        {
+          "source": ".state",
+          "specifiers": [
+            "ClinicalState"
+          ]
+        },
+        {
+          "source": "..agents.intake_agent",
+          "specifiers": [
+            "intake_agent"
+          ]
+        },
+        {
+          "source": "..agents.diagnosis_agent",
+          "specifiers": [
+            "diagnosis_agent"
+          ]
+        },
+        {
+          "source": "..agents.treatment_agent",
+          "specifiers": [
+            "treatment_agent"
+          ]
+        },
+        {
+          "source": "..agents.coding_agent",
+          "specifiers": [
+            "coding_agent"
+          ]
+        },
+        {
+          "source": "..agents.audit_agent",
+          "specifiers": [
+            "audit_agent"
+          ]
+        }
+      ],
+      "exports": [
+        "_route_after_diagnosis",
+        "build_clinical_pipeline",
+        "get_pipeline"
+      ],
+      "totalLines": 83,
+      "hasStructuralAnalysis": true
+    },
+    "src/graph/state.py": {
+      "filePath": "src/graph/state.py",
+      "contentHash": "13c9c77b1a565bf6bca592df487a02dd6365a9d21b2f731e52ddf1d0df7dbb15",
+      "functions": [
+        {
+          "name": "_merge_lists",
+          "params": [
+            "existing",
+            "new"
+          ],
+          "returnType": "list",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ClinicalState",
+          "methods": [],
+          "properties": [
+            "raw_input",
+            "patient_info",
+            "diagnosis",
+            "needs_more_info",
+            "diagnosis_retry_count",
+            "treatment_plan",
+            "coding_result",
+            "audit_result",
+            "messages",
+            "errors",
+            "current_agent"
+          ],
+          "exported": true,
+          "lineCount": 61
+        }
+      ],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Annotated",
+            "Any",
+            "Optional"
+          ]
+        },
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field"
+          ]
+        },
+        {
+          "source": "langgraph.graph.message",
+          "specifiers": [
+            "add_messages"
+          ]
+        },
+        {
+          "source": "langchain_core.messages",
+          "specifiers": [
+            "BaseMessage"
+          ]
+        },
+        {
+          "source": "..models.patient",
+          "specifiers": [
+            "PatientInfo"
+          ]
+        },
+        {
+          "source": "..models.diagnosis",
+          "specifiers": [
+            "DifferentialDiagnosis"
+          ]
+        },
+        {
+          "source": "..models.treatment",
+          "specifiers": [
+            "TreatmentPlan",
+            "CodingResult",
+            "AuditResult"
+          ]
+        }
+      ],
+      "exports": [
+        "_merge_lists",
+        "ClinicalState"
+      ],
+      "totalLines": 89,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/__init__.py": {
+      "filePath": "src/models/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/diagnosis.py": {
+      "filePath": "src/models/diagnosis.py",
+      "contentHash": "19c00a4544a3e18f1f6a6b23ddc604cae20ea7b0e296d39c762cc885972e2979",
+      "functions": [],
+      "classes": [
+        {
+          "name": "DiagnosisCandidate",
+          "methods": [],
+          "properties": [
+            "disease_name",
+            "icd10_hint",
+            "confidence",
+            "evidence",
+            "reasoning"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "DifferentialDiagnosis",
+          "methods": [],
+          "properties": [
+            "primary_diagnosis",
+            "differential_list",
+            "recommended_tests",
+            "clinical_notes",
+            "knowledge_sources"
+          ],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field"
+          ]
+        }
+      ],
+      "exports": [
+        "DiagnosisCandidate",
+        "DifferentialDiagnosis"
+      ],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/patient.py": {
+      "filePath": "src/models/patient.py",
+      "contentHash": "77248b703cbb2610c890c61be87a3a9b01d8c786ba1e7cc33696c26609807911",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Gender",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "Severity",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "Symptom",
+          "methods": [],
+          "properties": [
+            "name",
+            "duration_days",
+            "severity",
+            "description"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "Allergy",
+          "methods": [],
+          "properties": [
+            "substance",
+            "reaction",
+            "severity"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Medication",
+          "methods": [],
+          "properties": [
+            "name",
+            "dosage",
+            "frequency",
+            "start_date"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "VitalSigns",
+          "methods": [],
+          "properties": [
+            "temperature",
+            "heart_rate",
+            "blood_pressure_systolic",
+            "blood_pressure_diastolic",
+            "respiratory_rate",
+            "oxygen_saturation"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "LabResult",
+          "methods": [],
+          "properties": [
+            "test_name",
+            "value",
+            "unit",
+            "reference_range",
+            "is_abnormal"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "PatientInfo",
+          "methods": [],
+          "properties": [
+            "patient_id",
+            "name",
+            "age",
+            "gender",
+            "chief_complaint",
+            "symptoms",
+            "medical_history",
+            "family_history",
+            "allergies",
+            "current_medications",
+            "vital_signs",
+            "lab_results",
+            "raw_input",
+            "created_at"
+          ],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "datetime"
+          ]
+        },
+        {
+          "source": "enum",
+          "specifiers": [
+            "Enum"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field"
+          ]
+        }
+      ],
+      "exports": [
+        "Gender",
+        "Severity",
+        "Symptom",
+        "Allergy",
+        "Medication",
+        "VitalSigns",
+        "LabResult",
+        "PatientInfo"
+      ],
+      "totalLines": 77,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/treatment.py": {
+      "filePath": "src/models/treatment.py",
+      "contentHash": "22dbe05b674e26f42b5a7be73d58fb989e6d0b056a0cda224865714c0af8a191",
+      "functions": [],
+      "classes": [
+        {
+          "name": "DrugInteractionSeverity",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "PrescribedMedication",
+          "methods": [],
+          "properties": [
+            "drug_name",
+            "generic_name",
+            "dosage",
+            "route",
+            "frequency",
+            "duration",
+            "contraindications",
+            "side_effects"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "DrugInteraction",
+          "methods": [],
+          "properties": [
+            "drug_a",
+            "drug_b",
+            "severity",
+            "description",
+            "recommendation"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "TreatmentPlan",
+          "methods": [],
+          "properties": [
+            "diagnosis_addressed",
+            "medications",
+            "drug_interactions",
+            "non_drug_treatments",
+            "lifestyle_recommendations",
+            "follow_up_plan",
+            "warnings",
+            "evidence_references"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "ICD10Code",
+          "methods": [],
+          "properties": [
+            "code",
+            "description",
+            "confidence",
+            "category"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DRGGroup",
+          "methods": [],
+          "properties": [
+            "drg_code",
+            "description",
+            "weight",
+            "mean_los"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "CodingResult",
+          "methods": [],
+          "properties": [
+            "primary_icd10",
+            "secondary_icd10_codes",
+            "drg_group",
+            "coding_notes",
+            "coding_confidence"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "AuditRecord",
+          "methods": [],
+          "properties": [
+            "timestamp",
+            "user_id",
+            "action",
+            "resource_type",
+            "resource_id",
+            "detail",
+            "outcome",
+            "ip_address"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "ComplianceCheck",
+          "methods": [],
+          "properties": [
+            "check_name",
+            "passed",
+            "detail"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "AuditResult",
+          "methods": [],
+          "properties": [
+            "hipaa_compliant",
+            "compliance_checks",
+            "phi_fields_found",
+            "phi_fields_masked",
+            "audit_trail",
+            "recommendations",
+            "overall_risk_level"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "enum",
+          "specifiers": [
+            "Enum"
+          ]
+        },
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "DrugInteractionSeverity",
+        "PrescribedMedication",
+        "DrugInteraction",
+        "TreatmentPlan",
+        "ICD10Code",
+        "DRGGroup",
+        "CodingResult",
+        "AuditRecord",
+        "ComplianceCheck",
+        "AuditResult"
+      ],
+      "totalLines": 101,
+      "hasStructuralAnalysis": true
+    },
+    "src/services/__init__.py": {
+      "filePath": "src/services/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/services/drug_interaction.py": {
+      "filePath": "src/services/drug_interaction.py",
+      "contentHash": "a135f1e958662ad0e10d5598ad06b8401956428e82f250ce060495c129e0afe7",
+      "functions": [
+        {
+          "name": "_normalize_drug",
+          "params": [
+            "name"
+          ],
+          "returnType": "list[str]",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "check_interactions",
+          "params": [
+            "new_drugs",
+            "current_drugs"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "check_allergy_contraindication",
+          "params": [
+            "drug",
+            "allergies"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        }
+      ],
+      "exports": [
+        "_normalize_drug",
+        "check_interactions",
+        "check_allergy_contraindication"
+      ],
+      "totalLines": 164,
+      "hasStructuralAnalysis": true
+    },
+    "src/services/fhir_service.py": {
+      "filePath": "src/services/fhir_service.py",
+      "contentHash": "41a5bfe0f763ec0f33741e7eec05b28d4375fc9197d526021d12bdaf0074476a",
+      "functions": [
+        {
+          "name": "patient_to_fhir",
+          "params": [
+            "patient_info"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "diagnosis_to_fhir_condition",
+          "params": [
+            "diagnosis",
+            "patient_id"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "medication_to_fhir",
+          "params": [
+            "medication",
+            "patient_id"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "push_to_fhir_server",
+          "params": [
+            "resource"
+          ],
+          "returnType": "Optional[dict]",
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "httpx",
+          "specifiers": [
+            "httpx"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "..config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        }
+      ],
+      "exports": [
+        "patient_to_fhir",
+        "diagnosis_to_fhir_condition",
+        "medication_to_fhir",
+        "push_to_fhir_server"
+      ],
+      "totalLines": 116,
+      "hasStructuralAnalysis": true
+    },
+    "src/services/graphrag_service.py": {
+      "filePath": "src/services/graphrag_service.py",
+      "contentHash": "4e77c48be7b0519c713075afacdeb1c9a3be068239f8ce97a570be0050a38b5a",
+      "functions": [
+        {
+          "name": "get_graphrag_service",
+          "params": [],
+          "returnType": "GraphRAGService",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_normalize_symptom",
+          "params": [
+            "symptom"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [
+        {
+          "name": "_AwaitableNone",
+          "methods": [
+            "__await__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_AwaitableList",
+          "methods": [
+            "__await__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "GraphRAGService",
+          "methods": [
+            "__init__",
+            "connect",
+            "find_diseases_by_symptoms",
+            "_find_diseases_by_symptoms_offline",
+            "_find_diseases_by_symptoms_neo4j",
+            "get_icd10",
+            "query_neo4j",
+            "close"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 131
+        }
+      ],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        },
+        {
+          "source": "..config.settings",
+          "specifiers": [
+            "get_settings"
+          ]
+        }
+      ],
+      "exports": [
+        "_AwaitableNone",
+        "_AwaitableList",
+        "GraphRAGService",
+        "get_graphrag_service",
+        "_normalize_symptom"
+      ],
+      "totalLines": 213,
+      "hasStructuralAnalysis": true
+    },
+    "src/services/hipaa_service.py": {
+      "filePath": "src/services/hipaa_service.py",
+      "contentHash": "df5bc79356513f662a5b944a66bc119978a4c1298dae830a774ff89a531b0116",
+      "functions": [
+        {
+          "name": "detect_phi",
+          "params": [
+            "text"
+          ],
+          "returnType": "dict[str, list[str]]",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "deidentify_text",
+          "params": [
+            "text"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "hash_identifier",
+          "params": [
+            "value"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "get_audit_logger",
+          "params": [],
+          "returnType": "AuditLogger",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "AuditLogger",
+          "methods": [
+            "__init__",
+            "log",
+            "get_records",
+            "get_records_for_resource"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "hashlib",
+          "specifiers": [
+            "hashlib"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timezone"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        }
+      ],
+      "exports": [
+        "detect_phi",
+        "deidentify_text",
+        "hash_identifier",
+        "AuditLogger",
+        "get_audit_logger"
+      ],
+      "totalLines": 122,
+      "hasStructuralAnalysis": true
+    },
+    "src/services/icd10_service.py": {
+      "filePath": "src/services/icd10_service.py",
+      "contentHash": "818c0d77e645214c921c39d28ae2b43089a11384bc44299125c338a0ce3146fc",
+      "functions": [
+        {
+          "name": "lookup_icd10",
+          "params": [
+            "code"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "search_icd10_by_text",
+          "params": [
+            "text"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "get_drg_group",
+          "params": [
+            "icd10_code"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "validate_icd10_code",
+          "params": [
+            "code"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        }
+      ],
+      "exports": [
+        "lookup_icd10",
+        "search_icd10_by_text",
+        "get_drg_group",
+        "validate_icd10_code"
+      ],
+      "totalLines": 163,
+      "hasStructuralAnalysis": true
+    },
+    "tests/__init__.py": {
+      "filePath": "tests/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "tests/.generated_graphrag_import/icd10_codes.csv": {
+      "filePath": "tests/.generated_graphrag_import/icd10_codes.csv",
+      "contentHash": "16bfc90ca151db64d5ac698441be93bbcd5c7b2764ef1d8e4775e990ef9effc7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/snomed_concepts.csv": {
+      "filePath": "tests/.generated_graphrag_import/snomed_concepts.csv",
+      "contentHash": "6fbe58536226db30ea51ec90384fa9a550726b2354ce209975823d7ea7a8564b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/snomed_definitions.csv": {
+      "filePath": "tests/.generated_graphrag_import/snomed_definitions.csv",
+      "contentHash": "3b909164d48fda52ff24eb0f235f4acf1ba53c4f22ba10caaa82465bf052d4fb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/snomed_icd10_maps.csv": {
+      "filePath": "tests/.generated_graphrag_import/snomed_icd10_maps.csv",
+      "contentHash": "5b430a481c7543a32f32adcdf7c7c3f968c648586ddfd471332f0363fd3dd034",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/snomed_is_a.csv": {
+      "filePath": "tests/.generated_graphrag_import/snomed_is_a.csv",
+      "contentHash": "2e3ebd84b5fc31c30f8e722e43001ec495db90c1d3d7a2032569994033552a8a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/snomed_relationships.csv": {
+      "filePath": "tests/.generated_graphrag_import/snomed_relationships.csv",
+      "contentHash": "8d9f90a6838d63548153dc77f3e3a35b79b27af2e829ecbc53d8fcda7cbf0a91",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/snomed_terms.csv": {
+      "filePath": "tests/.generated_graphrag_import/snomed_terms.csv",
+      "contentHash": "f4d29e1779918a1d018437b813bcfc3588202849657933c2e6e76e17668e95b2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/umls_concepts.csv": {
+      "filePath": "tests/.generated_graphrag_import/umls_concepts.csv",
+      "contentHash": "7ad6cd1a599d53b579d5ef7ea85549258a6cda72430116f168b7e61f4c0b692a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/umls_same_as.csv": {
+      "filePath": "tests/.generated_graphrag_import/umls_same_as.csv",
+      "contentHash": "2aee4d40b4505053b8756db7905066afdc81879f277b9ccd5a6461ae6c6f20c1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/umls_snomed_aliases.csv": {
+      "filePath": "tests/.generated_graphrag_import/umls_snomed_aliases.csv",
+      "contentHash": "06c7c1d9cbeb074ff3b971b1acc66d742ee283e07194b0dc42cb1e30ab680d01",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_graphrag_import/umls_terms.csv": {
+      "filePath": "tests/.generated_graphrag_import/umls_terms.csv",
+      "contentHash": "7145f3190129b7bac4e03db3d9f272b044eddfe2ecffe851c3fd097ea259935d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_icd10cm/icd10cm_codes_2026.json": {
+      "filePath": "tests/.generated_icd10cm/icd10cm_codes_2026.json",
+      "contentHash": "4fb602d3aeef379169a17a9b0e1ff4106a2390340f970701e070e329395c44d5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "tests/.generated_umls_import/concept_semantic_types.csv": {
+      "filePath": "tests/.generated_umls_import/concept_semantic_types.csv",
+      "contentHash": "4856662dcc4b4225e029fe4d8db1b27445aa36aaef868df036b29fe6458f038a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_umls_import/concepts.csv": {
+      "filePath": "tests/.generated_umls_import/concepts.csv",
+      "contentHash": "f6fe6a48544be6b6b8445b2c08e76a067245c032a8e2b9d6af4bb07485dcae4d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_umls_import/definitions.csv": {
+      "filePath": "tests/.generated_umls_import/definitions.csv",
+      "contentHash": "8ab0fed3ee6c4fdce93a71471b5f4b6b98084a4ee633746e6cf1a59197c2d630",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_umls_import/relationships.csv": {
+      "filePath": "tests/.generated_umls_import/relationships.csv",
+      "contentHash": "fe2402a4ac8d7076a6291fdbae345a7af416d2d086a40d774e7d268be35ca5f4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_umls_import/semantic_types.csv": {
+      "filePath": "tests/.generated_umls_import/semantic_types.csv",
+      "contentHash": "15661c2e75f84368e3ad8a07a2b3c24247c274f850a968240ed608b33c3b237b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_umls_import/source_codes.csv": {
+      "filePath": "tests/.generated_umls_import/source_codes.csv",
+      "contentHash": "b5f0421830f40da99adca14c1dbd2968eedd0b64d56108255e7c8700e181ddc6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/.generated_umls_import/terms.csv": {
+      "filePath": "tests/.generated_umls_import/terms.csv",
+      "contentHash": "65a70309ccbe6aff0e066ba33c15ebc5a7092fc8efc5ea556a62e0fcb5963bda",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "tests/test_api_stream.py": {
+      "filePath": "tests/test_api_stream.py",
+      "contentHash": "679857b5e480bcfb00ec434e0dc3e95331e637e8b3b6f7e922321a1920ed54fa",
+      "functions": [
+        {
+          "name": "test_iter_analyze_events_emits_stage_order_and_done",
+          "params": [
+            "monkeypatch"
+          ],
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "test_iter_analyze_events_emits_error_event",
+          "params": [
+            "monkeypatch"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [
+        {
+          "name": "FakePipeline",
+          "methods": [
+            "__init__",
+            "stream"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "src.api",
+          "specifiers": [
+            "routes"
+          ]
+        },
+        {
+          "source": "src.api.routes",
+          "specifiers": [
+            "AnalyzeRequest",
+            "iter_analyze_events"
+          ]
+        }
+      ],
+      "exports": [
+        "FakePipeline",
+        "test_iter_analyze_events_emits_stage_order_and_done",
+        "test_iter_analyze_events_emits_error_event"
+      ],
+      "totalLines": 75,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_neo4j_integration.py": {
+      "filePath": "tests/test_neo4j_integration.py",
+      "contentHash": "4829288259ad71ae9a719101618dcaac248f55c35b419d8754a18e8ed309735d",
+      "functions": [
+        {
+          "name": "test_seeded_neo4j_returns_pneumonia_candidate",
+          "params": [],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "pytest",
+          "specifiers": [
+            "pytest"
+          ]
+        }
+      ],
+      "exports": [
+        "test_seeded_neo4j_returns_pneumonia_candidate"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_pipeline_routing.py": {
+      "filePath": "tests/test_pipeline_routing.py",
+      "contentHash": "7bb46dbca2ee0e57628e35e3e3e58596fe3633683e1a10748c6b60b20263454d",
+      "functions": [
+        {
+          "name": "test_diagnosis_route_retries_intake_when_more_info_requested",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_diagnosis_route_stops_retrying_after_max_attempts",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_diagnosis_route_continues_when_no_more_info_needed",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "src.graph.clinical_pipeline",
+          "specifiers": [
+            "MAX_DIAGNOSIS_RETRIES",
+            "_route_after_diagnosis"
+          ]
+        },
+        {
+          "source": "src.graph.state",
+          "specifiers": [
+            "ClinicalState"
+          ]
+        }
+      ],
+      "exports": [
+        "test_diagnosis_route_retries_intake_when_more_info_requested",
+        "test_diagnosis_route_stops_retrying_after_max_attempts",
+        "test_diagnosis_route_continues_when_no_more_info_needed"
+      ],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_seed_neo4j_kg.py": {
+      "filePath": "tests/test_seed_neo4j_kg.py",
+      "contentHash": "04bd2506d9f47ddd6c6ff17c9f41b293b15f9f46672f7da52734beef762ffa41",
+      "functions": [
+        {
+          "name": "test_build_seed_rows_contains_pneumonia_graph",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_seed_helpers_issue_expected_cypher",
+          "params": [],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [
+        {
+          "name": "RecordingSession",
+          "methods": [
+            "__init__",
+            "run"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "RecordingResult",
+          "methods": [
+            "__init__",
+            "single",
+            "consume"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "scripts.seed_neo4j_kg",
+          "specifiers": [
+            "build_seed_rows",
+            "create_constraints",
+            "reset_graph",
+            "seed_graph"
+          ]
+        }
+      ],
+      "exports": [
+        "RecordingSession",
+        "RecordingResult",
+        "test_build_seed_rows_contains_pneumonia_graph",
+        "test_seed_helpers_issue_expected_cypher"
+      ],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_services.py": {
+      "filePath": "tests/test_services.py",
+      "contentHash": "92c616fef1ffb83e61264895bfa7650cacae5f6811e08d3a1094bf71ca9cadba",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TestICD10Service",
+          "methods": [
+            "test_lookup_known_code",
+            "test_lookup_unknown_code",
+            "test_search_by_text",
+            "test_drg_group",
+            "test_validate_code"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "TestDrugInteraction",
+          "methods": [
+            "test_known_interaction",
+            "test_no_interaction",
+            "test_class_based_interaction",
+            "test_allergy_check"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "TestHIPAAService",
+          "methods": [
+            "test_detect_ssn",
+            "test_detect_email",
+            "test_deidentify",
+            "test_hash_identifier"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "TestGraphRAGService",
+          "methods": [
+            "test_symptom_lookup",
+            "test_icd10_lookup"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "TestIntakeSanitization",
+          "methods": [
+            "test_null_severity_defaults_to_moderate"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "imports": [
+        {
+          "source": "pytest",
+          "specifiers": [
+            "pytest"
+          ]
+        },
+        {
+          "source": "src.services.icd10_service",
+          "specifiers": [
+            "lookup_icd10",
+            "search_icd10_by_text",
+            "get_drg_group",
+            "validate_icd10_code"
+          ]
+        },
+        {
+          "source": "src.services.drug_interaction",
+          "specifiers": [
+            "check_interactions",
+            "check_allergy_contraindication"
+          ]
+        },
+        {
+          "source": "src.services.hipaa_service",
+          "specifiers": [
+            "detect_phi",
+            "deidentify_text",
+            "hash_identifier"
+          ]
+        },
+        {
+          "source": "src.services.graphrag_service",
+          "specifiers": [
+            "GraphRAGService"
+          ]
+        },
+        {
+          "source": "src.agents.intake_agent",
+          "specifiers": [
+            "_sanitize_patient_data"
+          ]
+        }
+      ],
+      "exports": [
+        "TestICD10Service",
+        "TestDrugInteraction",
+        "TestHIPAAService",
+        "TestGraphRAGService",
+        "TestIntakeSanitization"
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

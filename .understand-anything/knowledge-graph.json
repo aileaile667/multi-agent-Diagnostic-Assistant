@@ -1,0 +1,4038 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "Python 多 Agent 临床辅助决策系统",
+    "languages": [
+      "python",
+      "csv",
+      "typescript",
+      "markdown",
+      "vue",
+      "json",
+      "javascript",
+      "yaml",
+      "dockerfile",
+      "html",
+      "css",
+      "txt"
+    ],
+    "frameworks": [
+      "FastAPI",
+      "LangGraph",
+      "Pydantic",
+      "Neo4j",
+      "pytest",
+      "Vue 3",
+      "Vite",
+      "Pinia"
+    ],
+    "description": "基于 LangGraph、FastAPI、GraphRAG、FHIR、HIPAA 和 Vue 工作台构建的临床决策辅助系统，覆盖接诊、诊断、治疗、编码和审计流程。",
+    "analyzedAt": "2026-05-30T07:35:59.337Z",
+    "gitCommitHash": "483df57fc781b4d223843855b291012ef4fd6a5f",
+    "readmeHead": "# Python 版 — 多Agent临床辅助决策系统\r\n\r\n基于 **LangGraph + FastAPI + GraphRAG + PostgreSQL** 构建。\r\n\r\n## 快速开始\r\n\r\n```bash\r\n# 1. 安装依赖\r\npip install -r requirements.txt\r\n\r\n# 2. 配置环境变量\r\ncp .env.example .env\r\n# 编辑 .env 填入你的 DeepSeek API Key\r\n\r\n# 3. 启动服务\r\nuvicorn src.api.main:app --reload --port 8000\r\n\r\n# 4. 打开 Swagger 文档\r\n# http://localhost:8000/docs\r\n```\r\n\r\n## Docker 启动\r\n\r\n```bash\r\ndocker-compose up -d\r\n```\r\n\r\n## API 接口\r\n\r\n| 方法 | 路径 | 说明 |\r\n|------|------|------|\r\n| POST | `/api/v1/clinical/analyze` | 运行完整5-Agent Pipeline |\r\n| POST | `/api/v1/clinical/icd10/search` | 搜索ICD-10编码 |\r\n| GET  | `/api/v1/clinical/icd10/{code}` | 查询特定ICD-10编码 |\r\n| POST | `/api/v1/clinical/ddi/check` | 药物交互检查 |\r\n| GET  | `/health` | 健康检查 |\r\n\r\n## 运行测试\r\n\r\n```bash\r\npytest tests/ -v\n```\n\n## Vue Frontend Workbench\n\nThe Python implementation includes a Vue 3 demo workbench in `frontend/`.\n\n```bash\n# Backend\nuvicorn src.api.main:app --reload --port 8000\n\n# Frontend\ncd frontend\nnpm install\nnpm run dev\n```\n\nOpen `http://localhost:5173`.",
+    "repositoryReadmeHead": "<div align=\"center\">\r\n\r\n# 🏥 多Agent医疗临床辅助决策系统\r\n\r\n**Multi-Agent Clinical Decision Support System**\r\n\r\n[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](python/)\r\n[![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](java/)\r\n[![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](go/)\r\n[![LangGraph](https://img.shields.io/badge/LangGraph-0.2+-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](python/src/graph/)\r\n[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](java/)\r\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](python/)\r\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)\r\n[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-th"
+  },
+  "nodes": [
+    {
+      "id": "config:.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".env.example",
+      "summary": "config config 文件，参与多 Agent 临床决策系统的实现或配置。",
+      "tags": [
+        "config",
+        "root"
+      ],
+      "languageNotes": "该文件使用 config，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "config:data/sample_patients.json",
+      "type": "config",
+      "name": "sample_patients.json",
+      "filePath": "data/sample_patients.json",
+      "summary": "示例临床数据或小型参考数据，供演示和测试流程使用。",
+      "tags": [
+        "json",
+        "config",
+        "data"
+      ],
+      "languageNotes": "该文件使用 json，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "config:docker-compose.yml",
+      "type": "config",
+      "name": "docker-compose.yml",
+      "filePath": "docker-compose.yml",
+      "summary": "容器化和本地依赖编排配置。",
+      "tags": [
+        "yaml",
+        "infra",
+        "root"
+      ],
+      "languageNotes": "该文件使用 yaml，在项目中归类为 infra。",
+      "complexity": "low"
+    },
+    {
+      "id": "service:Dockerfile",
+      "type": "service",
+      "name": "Dockerfile",
+      "filePath": "Dockerfile",
+      "summary": "容器化和本地依赖编排配置。",
+      "tags": [
+        "dockerfile",
+        "infra",
+        "root"
+      ],
+      "languageNotes": "该文件使用 dockerfile，在项目中归类为 infra。",
+      "complexity": "low"
+    },
+    {
+      "id": "document:docs/00-项目概览.md",
+      "type": "document",
+      "name": "00-项目概览.md",
+      "filePath": "docs/00-项目概览.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/01-环境搭建指南.md",
+      "type": "document",
+      "name": "01-环境搭建指南.md",
+      "filePath": "docs/01-环境搭建指南.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/02-架构设计详解.md",
+      "type": "document",
+      "name": "02-架构设计详解.md",
+      "filePath": "docs/02-架构设计详解.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/03-Agent设计原理.md",
+      "type": "document",
+      "name": "03-Agent设计原理.md",
+      "filePath": "docs/03-Agent设计原理.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/04-GraphRAG知识图谱.md",
+      "type": "document",
+      "name": "04-GraphRAG知识图谱.md",
+      "filePath": "docs/04-GraphRAG知识图谱.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/05-FHIR-API集成.md",
+      "type": "document",
+      "name": "05-FHIR-API集成.md",
+      "filePath": "docs/05-FHIR-API集成.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/06-HIPAA合规设计.md",
+      "type": "document",
+      "name": "06-HIPAA合规设计.md",
+      "filePath": "docs/06-HIPAA合规设计.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "document:docs/07-部署运维指南.md",
+      "type": "document",
+      "name": "07-部署运维指南.md",
+      "filePath": "docs/07-部署运维指南.md",
+      "summary": "中文技术文档，解释系统架构、Agent、GraphRAG、FHIR、HIPAA 和部署运维。",
+      "tags": [
+        "markdown",
+        "docs"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "high"
+    },
+    {
+      "id": "config:frontend/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "frontend/.env.example",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "config",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 config，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "frontend/index.html",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "html",
+        "markup",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 html，在项目中归类为 markup。",
+      "complexity": "low"
+    },
+    {
+      "id": "config:frontend/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "frontend/package.json",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "json",
+        "config",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 json，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/api/clinicalApi.test.ts",
+      "type": "file",
+      "name": "clinicalApi.test.ts",
+      "filePath": "frontend/src/api/clinicalApi.test.ts",
+      "summary": "前端 API 客户端，负责调用后端临床接口并处理响应。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/api/clinicalApi.ts",
+      "type": "file",
+      "name": "clinicalApi.ts",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "前端 API 客户端，负责调用后端临床接口并处理响应。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:frontend/src/App.vue",
+      "type": "file",
+      "name": "App.vue",
+      "filePath": "frontend/src/App.vue",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/components/JsonPreview.vue",
+      "type": "file",
+      "name": "JsonPreview.vue",
+      "filePath": "frontend/src/components/JsonPreview.vue",
+      "summary": "Vue 可复用组件，用于进度展示、结果面板和 JSON 预览。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/components/ResultsPanel.test.ts",
+      "type": "file",
+      "name": "ResultsPanel.test.ts",
+      "filePath": "frontend/src/components/ResultsPanel.test.ts",
+      "summary": "Vue 可复用组件，用于进度展示、结果面板和 JSON 预览。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/components/ResultsPanel.vue",
+      "type": "file",
+      "name": "ResultsPanel.vue",
+      "filePath": "frontend/src/components/ResultsPanel.vue",
+      "summary": "Vue 可复用组件，用于进度展示、结果面板和 JSON 预览。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:frontend/src/components/StageProgress.vue",
+      "type": "file",
+      "name": "StageProgress.vue",
+      "filePath": "frontend/src/components/StageProgress.vue",
+      "summary": "Vue 可复用组件，用于进度展示、结果面板和 JSON 预览。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/main.ts",
+      "type": "file",
+      "name": "main.ts",
+      "filePath": "frontend/src/main.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/router/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "frontend/src/router/index.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/stores/analysisStore.test.ts",
+      "type": "file",
+      "name": "analysisStore.test.ts",
+      "filePath": "frontend/src/stores/analysisStore.test.ts",
+      "summary": "Vue 工作台状态管理，保存分析流程、阶段进度和结果。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/stores/analysisStore.ts",
+      "type": "file",
+      "name": "analysisStore.ts",
+      "filePath": "frontend/src/stores/analysisStore.ts",
+      "summary": "Vue 工作台状态管理，保存分析流程、阶段进度和结果。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:frontend/src/styles.css",
+      "type": "file",
+      "name": "styles.css",
+      "filePath": "frontend/src/styles.css",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "css",
+        "markup",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 css，在项目中归类为 markup。",
+      "complexity": "high"
+    },
+    {
+      "id": "file:frontend/src/test/setup.ts",
+      "type": "file",
+      "name": "setup.ts",
+      "filePath": "frontend/src/test/setup.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/types/clinical.ts",
+      "type": "file",
+      "name": "clinical.ts",
+      "filePath": "frontend/src/types/clinical.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/views/AnalysisView.vue",
+      "type": "file",
+      "name": "AnalysisView.vue",
+      "filePath": "frontend/src/views/AnalysisView.vue",
+      "summary": "Vue 页面视图，呈现分析、ICD-10、DDI 和健康检查工作流。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/views/DDIView.vue",
+      "type": "file",
+      "name": "DDIView.vue",
+      "filePath": "frontend/src/views/DDIView.vue",
+      "summary": "Vue 页面视图，呈现分析、ICD-10、DDI 和健康检查工作流。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/views/HealthView.vue",
+      "type": "file",
+      "name": "HealthView.vue",
+      "filePath": "frontend/src/views/HealthView.vue",
+      "summary": "Vue 页面视图，呈现分析、ICD-10、DDI 和健康检查工作流。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/src/views/ICD10View.vue",
+      "type": "file",
+      "name": "ICD10View.vue",
+      "filePath": "frontend/src/views/ICD10View.vue",
+      "summary": "Vue 页面视图，呈现分析、ICD-10、DDI 和健康检查工作流。",
+      "tags": [
+        "vue",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 vue，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:frontend/src/vite-env.d.ts",
+      "type": "file",
+      "name": "vite-env.d.ts",
+      "filePath": "frontend/src/vite-env.d.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "config:frontend/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "frontend/tsconfig.json",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "json",
+        "config",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 json，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "config:frontend/tsconfig.node.json",
+      "type": "config",
+      "name": "tsconfig.node.json",
+      "filePath": "frontend/tsconfig.node.json",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "json",
+        "config",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 json，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/vite.config.d.ts",
+      "type": "file",
+      "name": "vite.config.d.ts",
+      "filePath": "frontend/vite.config.d.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/vite.config.js",
+      "type": "file",
+      "name": "vite.config.js",
+      "filePath": "frontend/vite.config.js",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "javascript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 javascript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "frontend/vite.config.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/vitest.config.d.ts",
+      "type": "file",
+      "name": "vitest.config.d.ts",
+      "filePath": "frontend/vitest.config.d.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/vitest.config.js",
+      "type": "file",
+      "name": "vitest.config.js",
+      "filePath": "frontend/vitest.config.js",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "javascript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 javascript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:frontend/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "frontend/vitest.config.ts",
+      "summary": "Vue 3 + Vite 前端工作台相关源码、配置或测试文件。",
+      "tags": [
+        "typescript",
+        "code",
+        "frontend",
+        "Vue"
+      ],
+      "languageNotes": "该文件使用 typescript，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "document:README-python.md",
+      "type": "document",
+      "name": "README-python.md",
+      "filePath": "README-python.md",
+      "summary": "Python 版本的快速开始、API、Docker 与前端工作台说明。",
+      "tags": [
+        "markdown",
+        "docs",
+        "root"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "low"
+    },
+    {
+      "id": "document:requirements.txt",
+      "type": "document",
+      "name": "requirements.txt",
+      "filePath": "requirements.txt",
+      "summary": "Python 运行依赖清单。",
+      "tags": [
+        "txt",
+        "docs",
+        "root"
+      ],
+      "languageNotes": "该文件使用 txt，在项目中归类为 docs。",
+      "complexity": "low"
+    },
+    {
+      "id": "document:resume_project_intro.md",
+      "type": "document",
+      "name": "resume_project_intro.md",
+      "filePath": "resume_project_intro.md",
+      "summary": "markdown docs 文件，参与多 Agent 临床决策系统的实现或配置。",
+      "tags": [
+        "markdown",
+        "docs",
+        "root"
+      ],
+      "languageNotes": "该文件使用 markdown，在项目中归类为 docs。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:scripts/seed_neo4j_kg.py",
+      "type": "file",
+      "name": "seed_neo4j_kg.py",
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "summary": "项目脚本，用于初始化或维护临床知识图谱数据。",
+      "tags": [
+        "python",
+        "code",
+        "scripts"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/__init__.py",
+      "summary": "python code 文件，参与多 Agent 临床决策系统的实现或配置。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/agents/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/agents/__init__.py",
+      "summary": "专科 Agent 实现，负责接诊、诊断、治疗、编码和合规审计等临床推理步骤。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/agents/audit_agent.py",
+      "type": "file",
+      "name": "audit_agent.py",
+      "filePath": "src/agents/audit_agent.py",
+      "summary": "专科 Agent 实现，负责接诊、诊断、治疗、编码和合规审计等临床推理步骤。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/agents/coding_agent.py",
+      "type": "file",
+      "name": "coding_agent.py",
+      "filePath": "src/agents/coding_agent.py",
+      "summary": "专科 Agent 实现，负责接诊、诊断、治疗、编码和合规审计等临床推理步骤。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/agents/diagnosis_agent.py",
+      "type": "file",
+      "name": "diagnosis_agent.py",
+      "filePath": "src/agents/diagnosis_agent.py",
+      "summary": "专科 Agent 实现，负责接诊、诊断、治疗、编码和合规审计等临床推理步骤。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/agents/intake_agent.py",
+      "type": "file",
+      "name": "intake_agent.py",
+      "filePath": "src/agents/intake_agent.py",
+      "summary": "专科 Agent 实现，负责接诊、诊断、治疗、编码和合规审计等临床推理步骤。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/agents/treatment_agent.py",
+      "type": "file",
+      "name": "treatment_agent.py",
+      "filePath": "src/agents/treatment_agent.py",
+      "summary": "专科 Agent 实现，负责接诊、诊断、治疗、编码和合规审计等临床推理步骤。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/api/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/api/__init__.py",
+      "summary": "FastAPI HTTP 接口层，暴露临床分析、ICD-10、药物相互作用和健康检查能力。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "FastAPI"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/api/main.py",
+      "type": "file",
+      "name": "main.py",
+      "filePath": "src/api/main.py",
+      "summary": "FastAPI HTTP 接口层，暴露临床分析、ICD-10、药物相互作用和健康检查能力。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "FastAPI"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/api/routes.py",
+      "type": "file",
+      "name": "routes.py",
+      "filePath": "src/api/routes.py",
+      "summary": "FastAPI HTTP 接口层，暴露临床分析、ICD-10、药物相互作用和健康检查能力。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "FastAPI"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/config/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/config/__init__.py",
+      "summary": "应用配置加载与运行时设置。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/config/settings.py",
+      "type": "file",
+      "name": "settings.py",
+      "filePath": "src/config/settings.py",
+      "summary": "应用配置加载与运行时设置。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/graph/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/graph/__init__.py",
+      "summary": "LangGraph 临床流水线编排与状态定义，连接多个 Agent 的执行路径。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/graph/clinical_pipeline.py",
+      "type": "file",
+      "name": "clinical_pipeline.py",
+      "filePath": "src/graph/clinical_pipeline.py",
+      "summary": "LangGraph 临床流水线编排与状态定义，连接多个 Agent 的执行路径。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/graph/state.py",
+      "type": "file",
+      "name": "state.py",
+      "filePath": "src/graph/state.py",
+      "summary": "LangGraph 临床流水线编排与状态定义，连接多个 Agent 的执行路径。",
+      "tags": [
+        "python",
+        "code",
+        "src",
+        "LangGraph"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/models/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/models/__init__.py",
+      "summary": "Pydantic 数据模型，描述患者、诊断和治疗等核心临床数据结构。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/models/diagnosis.py",
+      "type": "file",
+      "name": "diagnosis.py",
+      "filePath": "src/models/diagnosis.py",
+      "summary": "Pydantic 数据模型，描述患者、诊断和治疗等核心临床数据结构。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/models/patient.py",
+      "type": "file",
+      "name": "patient.py",
+      "filePath": "src/models/patient.py",
+      "summary": "Pydantic 数据模型，描述患者、诊断和治疗等核心临床数据结构。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/models/treatment.py",
+      "type": "file",
+      "name": "treatment.py",
+      "filePath": "src/models/treatment.py",
+      "summary": "Pydantic 数据模型，描述患者、诊断和治疗等核心临床数据结构。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/services/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "src/services/__init__.py",
+      "summary": "领域服务层，封装 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用逻辑。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/services/drug_interaction.py",
+      "type": "file",
+      "name": "drug_interaction.py",
+      "filePath": "src/services/drug_interaction.py",
+      "summary": "领域服务层，封装 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用逻辑。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/services/fhir_service.py",
+      "type": "file",
+      "name": "fhir_service.py",
+      "filePath": "src/services/fhir_service.py",
+      "summary": "领域服务层，封装 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用逻辑。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:src/services/graphrag_service.py",
+      "type": "file",
+      "name": "graphrag_service.py",
+      "filePath": "src/services/graphrag_service.py",
+      "summary": "领域服务层，封装 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用逻辑。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/services/hipaa_service.py",
+      "type": "file",
+      "name": "hipaa_service.py",
+      "filePath": "src/services/hipaa_service.py",
+      "summary": "领域服务层，封装 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用逻辑。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:src/services/icd10_service.py",
+      "type": "file",
+      "name": "icd10_service.py",
+      "filePath": "src/services/icd10_service.py",
+      "summary": "领域服务层，封装 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用逻辑。",
+      "tags": [
+        "python",
+        "code",
+        "src"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "medium"
+    },
+    {
+      "id": "file:tests/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "tests/__init__.py",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "python",
+        "code",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/icd10_codes.csv",
+      "type": "file",
+      "name": "icd10_codes.csv",
+      "filePath": "tests/.generated_graphrag_import/icd10_codes.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/snomed_concepts.csv",
+      "type": "file",
+      "name": "snomed_concepts.csv",
+      "filePath": "tests/.generated_graphrag_import/snomed_concepts.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/snomed_definitions.csv",
+      "type": "file",
+      "name": "snomed_definitions.csv",
+      "filePath": "tests/.generated_graphrag_import/snomed_definitions.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/snomed_icd10_maps.csv",
+      "type": "file",
+      "name": "snomed_icd10_maps.csv",
+      "filePath": "tests/.generated_graphrag_import/snomed_icd10_maps.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/snomed_is_a.csv",
+      "type": "file",
+      "name": "snomed_is_a.csv",
+      "filePath": "tests/.generated_graphrag_import/snomed_is_a.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/snomed_relationships.csv",
+      "type": "file",
+      "name": "snomed_relationships.csv",
+      "filePath": "tests/.generated_graphrag_import/snomed_relationships.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/snomed_terms.csv",
+      "type": "file",
+      "name": "snomed_terms.csv",
+      "filePath": "tests/.generated_graphrag_import/snomed_terms.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/umls_concepts.csv",
+      "type": "file",
+      "name": "umls_concepts.csv",
+      "filePath": "tests/.generated_graphrag_import/umls_concepts.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/umls_same_as.csv",
+      "type": "file",
+      "name": "umls_same_as.csv",
+      "filePath": "tests/.generated_graphrag_import/umls_same_as.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/umls_snomed_aliases.csv",
+      "type": "file",
+      "name": "umls_snomed_aliases.csv",
+      "filePath": "tests/.generated_graphrag_import/umls_snomed_aliases.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_graphrag_import/umls_terms.csv",
+      "type": "file",
+      "name": "umls_terms.csv",
+      "filePath": "tests/.generated_graphrag_import/umls_terms.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "config:tests/.generated_icd10cm/icd10cm_codes_2026.json",
+      "type": "config",
+      "name": "icd10cm_codes_2026.json",
+      "filePath": "tests/.generated_icd10cm/icd10cm_codes_2026.json",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "json",
+        "config",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 json，在项目中归类为 config。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/concept_semantic_types.csv",
+      "type": "file",
+      "name": "concept_semantic_types.csv",
+      "filePath": "tests/.generated_umls_import/concept_semantic_types.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/concepts.csv",
+      "type": "file",
+      "name": "concepts.csv",
+      "filePath": "tests/.generated_umls_import/concepts.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/definitions.csv",
+      "type": "file",
+      "name": "definitions.csv",
+      "filePath": "tests/.generated_umls_import/definitions.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/relationships.csv",
+      "type": "file",
+      "name": "relationships.csv",
+      "filePath": "tests/.generated_umls_import/relationships.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/semantic_types.csv",
+      "type": "file",
+      "name": "semantic_types.csv",
+      "filePath": "tests/.generated_umls_import/semantic_types.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/source_codes.csv",
+      "type": "file",
+      "name": "source_codes.csv",
+      "filePath": "tests/.generated_umls_import/source_codes.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/.generated_umls_import/terms.csv",
+      "type": "file",
+      "name": "terms.csv",
+      "filePath": "tests/.generated_umls_import/terms.csv",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "csv",
+        "data",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 csv，在项目中归类为 data。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/test_api_stream.py",
+      "type": "file",
+      "name": "test_api_stream.py",
+      "filePath": "tests/test_api_stream.py",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "python",
+        "code",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/test_neo4j_integration.py",
+      "type": "file",
+      "name": "test_neo4j_integration.py",
+      "filePath": "tests/test_neo4j_integration.py",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "python",
+        "code",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/test_pipeline_routing.py",
+      "type": "file",
+      "name": "test_pipeline_routing.py",
+      "filePath": "tests/test_pipeline_routing.py",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "python",
+        "code",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/test_seed_neo4j_kg.py",
+      "type": "file",
+      "name": "test_seed_neo4j_kg.py",
+      "filePath": "tests/test_seed_neo4j_kg.py",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "python",
+        "code",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "file:tests/test_services.py",
+      "type": "file",
+      "name": "test_services.py",
+      "filePath": "tests/test_services.py",
+      "summary": "pytest 测试，覆盖服务、API、流水线和 Neo4j GraphRAG 集成行为。",
+      "tags": [
+        "python",
+        "code",
+        "tests",
+        "pytest"
+      ],
+      "languageNotes": "该文件使用 python，在项目中归类为 code。",
+      "complexity": "low"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:requestJson",
+      "type": "function",
+      "name": "requestJson",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "requestJson 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 13 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:parseSseFrame",
+      "type": "function",
+      "name": "parseSseFrame",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "parseSseFrame 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 30 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:analyze",
+      "type": "function",
+      "name": "analyze",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "analyze 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 42 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:streamAnalyze",
+      "type": "function",
+      "name": "streamAnalyze",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "streamAnalyze 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 49 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:searchICD10",
+      "type": "function",
+      "name": "searchICD10",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "searchICD10 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 93 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:getICD10",
+      "type": "function",
+      "name": "getICD10",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "getICD10 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 100 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:checkDDI",
+      "type": "function",
+      "name": "checkDDI",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "checkDDI 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 106 行附近。"
+    },
+    {
+      "id": "function:frontend/src/api/clinicalApi.ts:health",
+      "type": "function",
+      "name": "health",
+      "filePath": "frontend/src/api/clinicalApi.ts",
+      "summary": "health 定义在 frontend/src/api/clinicalApi.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 119 行附近。"
+    },
+    {
+      "id": "function:frontend/src/stores/analysisStore.ts:createStageStatuses",
+      "type": "function",
+      "name": "createStageStatuses",
+      "filePath": "frontend/src/stores/analysisStore.ts",
+      "summary": "createStageStatuses 定义在 frontend/src/stores/analysisStore.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 26 行附近。"
+    },
+    {
+      "id": "function:frontend/src/stores/analysisStore.ts:mergePayload",
+      "type": "function",
+      "name": "mergePayload",
+      "filePath": "frontend/src/stores/analysisStore.ts",
+      "summary": "mergePayload 定义在 frontend/src/stores/analysisStore.ts，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "typescript"
+      ],
+      "languageNotes": "符号位于第 36 行附近。"
+    },
+    {
+      "id": "function:scripts/seed_neo4j_kg.py:build_seed_rows",
+      "type": "function",
+      "name": "build_seed_rows",
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "summary": "build_seed_rows 定义在 scripts/seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 19 行附近。"
+    },
+    {
+      "id": "function:scripts/seed_neo4j_kg.py:reset_graph",
+      "type": "function",
+      "name": "reset_graph",
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "summary": "reset_graph 定义在 scripts/seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 47 行附近。"
+    },
+    {
+      "id": "function:scripts/seed_neo4j_kg.py:create_constraints",
+      "type": "function",
+      "name": "create_constraints",
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "summary": "create_constraints 定义在 scripts/seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 66 行附近。"
+    },
+    {
+      "id": "function:scripts/seed_neo4j_kg.py:seed_graph",
+      "type": "function",
+      "name": "seed_graph",
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "summary": "seed_graph 定义在 scripts/seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 81 行附近。"
+    },
+    {
+      "id": "function:scripts/seed_neo4j_kg.py:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/seed_neo4j_kg.py",
+      "summary": "main 定义在 scripts/seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 136 行附近。"
+    },
+    {
+      "id": "function:src/agents/audit_agent.py:_scan_for_phi",
+      "type": "function",
+      "name": "_scan_for_phi",
+      "filePath": "src/agents/audit_agent.py",
+      "summary": "_scan_for_phi 定义在 src/agents/audit_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 47 行附近。"
+    },
+    {
+      "id": "function:src/agents/audit_agent.py:_mask_phi",
+      "type": "function",
+      "name": "_mask_phi",
+      "filePath": "src/agents/audit_agent.py",
+      "summary": "_mask_phi 定义在 src/agents/audit_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 57 行附近。"
+    },
+    {
+      "id": "function:src/agents/audit_agent.py:_create_audit_record",
+      "type": "function",
+      "name": "_create_audit_record",
+      "filePath": "src/agents/audit_agent.py",
+      "summary": "_create_audit_record 定义在 src/agents/audit_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 69 行附近。"
+    },
+    {
+      "id": "function:src/agents/audit_agent.py:audit_agent",
+      "type": "function",
+      "name": "audit_agent",
+      "filePath": "src/agents/audit_agent.py",
+      "summary": "audit_agent 定义在 src/agents/audit_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 80 行附近。"
+    },
+    {
+      "id": "function:src/agents/coding_agent.py:coding_agent",
+      "type": "function",
+      "name": "coding_agent",
+      "filePath": "src/agents/coding_agent.py",
+      "summary": "coding_agent 定义在 src/agents/coding_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 58 行附近。"
+    },
+    {
+      "id": "function:src/agents/diagnosis_agent.py:_extract_symptom_names",
+      "type": "function",
+      "name": "_extract_symptom_names",
+      "filePath": "src/agents/diagnosis_agent.py",
+      "summary": "_extract_symptom_names 定义在 src/agents/diagnosis_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 58 行附近。"
+    },
+    {
+      "id": "function:src/agents/diagnosis_agent.py:_format_graphrag_context",
+      "type": "function",
+      "name": "_format_graphrag_context",
+      "filePath": "src/agents/diagnosis_agent.py",
+      "summary": "_format_graphrag_context 定义在 src/agents/diagnosis_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 72 行附近。"
+    },
+    {
+      "id": "function:src/agents/diagnosis_agent.py:diagnosis_agent",
+      "type": "function",
+      "name": "diagnosis_agent",
+      "filePath": "src/agents/diagnosis_agent.py",
+      "summary": "diagnosis_agent 定义在 src/agents/diagnosis_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 92 行附近。"
+    },
+    {
+      "id": "function:src/agents/intake_agent.py:_sanitize_patient_data",
+      "type": "function",
+      "name": "_sanitize_patient_data",
+      "filePath": "src/agents/intake_agent.py",
+      "summary": "_sanitize_patient_data 定义在 src/agents/intake_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 62 行附近。"
+    },
+    {
+      "id": "function:src/agents/intake_agent.py:intake_agent",
+      "type": "function",
+      "name": "intake_agent",
+      "filePath": "src/agents/intake_agent.py",
+      "summary": "intake_agent 定义在 src/agents/intake_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 75 行附近。"
+    },
+    {
+      "id": "function:src/agents/treatment_agent.py:treatment_agent",
+      "type": "function",
+      "name": "treatment_agent",
+      "filePath": "src/agents/treatment_agent.py",
+      "summary": "treatment_agent 定义在 src/agents/treatment_agent.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 63 行附近。"
+    },
+    {
+      "id": "function:src/api/main.py:health_check",
+      "type": "function",
+      "name": "health_check",
+      "filePath": "src/api/main.py",
+      "summary": "health_check 定义在 src/api/main.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 36 行附近。"
+    },
+    {
+      "id": "class:src/api/routes.py:AnalyzeRequest",
+      "type": "class",
+      "name": "AnalyzeRequest",
+      "filePath": "src/api/routes.py",
+      "summary": "AnalyzeRequest 定义在 src/api/routes.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 29 行附近。"
+    },
+    {
+      "id": "class:src/api/routes.py:AnalyzeResponse",
+      "type": "class",
+      "name": "AnalyzeResponse",
+      "filePath": "src/api/routes.py",
+      "summary": "AnalyzeResponse 定义在 src/api/routes.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 46 行附近。"
+    },
+    {
+      "id": "class:src/api/routes.py:ICD10SearchRequest",
+      "type": "class",
+      "name": "ICD10SearchRequest",
+      "filePath": "src/api/routes.py",
+      "summary": "ICD10SearchRequest 定义在 src/api/routes.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 55 行附近。"
+    },
+    {
+      "id": "class:src/api/routes.py:DDICheckRequest",
+      "type": "class",
+      "name": "DDICheckRequest",
+      "filePath": "src/api/routes.py",
+      "summary": "DDICheckRequest 定义在 src/api/routes.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 59 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:_sse_message",
+      "type": "function",
+      "name": "_sse_message",
+      "filePath": "src/api/routes.py",
+      "summary": "_sse_message 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 73 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:_coerce_chunk_state",
+      "type": "function",
+      "name": "_coerce_chunk_state",
+      "filePath": "src/api/routes.py",
+      "summary": "_coerce_chunk_state 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 77 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:iter_analyze_events",
+      "type": "function",
+      "name": "iter_analyze_events",
+      "filePath": "src/api/routes.py",
+      "summary": "iter_analyze_events 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 89 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:sse_analyze_messages",
+      "type": "function",
+      "name": "sse_analyze_messages",
+      "filePath": "src/api/routes.py",
+      "summary": "sse_analyze_messages 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 153 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:analyze_patient",
+      "type": "function",
+      "name": "analyze_patient",
+      "filePath": "src/api/routes.py",
+      "summary": "analyze_patient 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 161 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:stream_analyze_patient",
+      "type": "function",
+      "name": "stream_analyze_patient",
+      "filePath": "src/api/routes.py",
+      "summary": "stream_analyze_patient 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 195 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:search_icd10",
+      "type": "function",
+      "name": "search_icd10",
+      "filePath": "src/api/routes.py",
+      "summary": "search_icd10 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 205 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:get_icd10",
+      "type": "function",
+      "name": "get_icd10",
+      "filePath": "src/api/routes.py",
+      "summary": "get_icd10 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 212 行附近。"
+    },
+    {
+      "id": "function:src/api/routes.py:check_ddi",
+      "type": "function",
+      "name": "check_ddi",
+      "filePath": "src/api/routes.py",
+      "summary": "check_ddi 定义在 src/api/routes.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 222 行附近。"
+    },
+    {
+      "id": "class:src/config/settings.py:Settings",
+      "type": "class",
+      "name": "Settings",
+      "filePath": "src/config/settings.py",
+      "summary": "Settings 定义在 src/config/settings.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 7 行附近。"
+    },
+    {
+      "id": "function:src/config/settings.py:get_settings",
+      "type": "function",
+      "name": "get_settings",
+      "filePath": "src/config/settings.py",
+      "summary": "get_settings 定义在 src/config/settings.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 70 行附近。"
+    },
+    {
+      "id": "function:src/graph/clinical_pipeline.py:_route_after_diagnosis",
+      "type": "function",
+      "name": "_route_after_diagnosis",
+      "filePath": "src/graph/clinical_pipeline.py",
+      "summary": "_route_after_diagnosis 定义在 src/graph/clinical_pipeline.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 24 行附近。"
+    },
+    {
+      "id": "function:src/graph/clinical_pipeline.py:build_clinical_pipeline",
+      "type": "function",
+      "name": "build_clinical_pipeline",
+      "filePath": "src/graph/clinical_pipeline.py",
+      "summary": "build_clinical_pipeline 定义在 src/graph/clinical_pipeline.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 35 行附近。"
+    },
+    {
+      "id": "function:src/graph/clinical_pipeline.py:get_pipeline",
+      "type": "function",
+      "name": "get_pipeline",
+      "filePath": "src/graph/clinical_pipeline.py",
+      "summary": "get_pipeline 定义在 src/graph/clinical_pipeline.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 78 行附近。"
+    },
+    {
+      "id": "class:src/graph/state.py:ClinicalState",
+      "type": "class",
+      "name": "ClinicalState",
+      "filePath": "src/graph/state.py",
+      "summary": "ClinicalState 定义在 src/graph/state.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 28 行附近。"
+    },
+    {
+      "id": "function:src/graph/state.py:_merge_lists",
+      "type": "function",
+      "name": "_merge_lists",
+      "filePath": "src/graph/state.py",
+      "summary": "_merge_lists 定义在 src/graph/state.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 23 行附近。"
+    },
+    {
+      "id": "class:src/models/diagnosis.py:DiagnosisCandidate",
+      "type": "class",
+      "name": "DiagnosisCandidate",
+      "filePath": "src/models/diagnosis.py",
+      "summary": "DiagnosisCandidate 定义在 src/models/diagnosis.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 7 行附近。"
+    },
+    {
+      "id": "class:src/models/diagnosis.py:DifferentialDiagnosis",
+      "type": "class",
+      "name": "DifferentialDiagnosis",
+      "filePath": "src/models/diagnosis.py",
+      "summary": "DifferentialDiagnosis 定义在 src/models/diagnosis.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 16 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:Gender",
+      "type": "class",
+      "name": "Gender",
+      "filePath": "src/models/patient.py",
+      "summary": "Gender 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 10 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:Severity",
+      "type": "class",
+      "name": "Severity",
+      "filePath": "src/models/patient.py",
+      "summary": "Severity 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 17 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:Symptom",
+      "type": "class",
+      "name": "Symptom",
+      "filePath": "src/models/patient.py",
+      "summary": "Symptom 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 24 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:Allergy",
+      "type": "class",
+      "name": "Allergy",
+      "filePath": "src/models/patient.py",
+      "summary": "Allergy 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 31 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:Medication",
+      "type": "class",
+      "name": "Medication",
+      "filePath": "src/models/patient.py",
+      "summary": "Medication 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 37 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:VitalSigns",
+      "type": "class",
+      "name": "VitalSigns",
+      "filePath": "src/models/patient.py",
+      "summary": "VitalSigns 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 44 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:LabResult",
+      "type": "class",
+      "name": "LabResult",
+      "filePath": "src/models/patient.py",
+      "summary": "LabResult 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 53 行附近。"
+    },
+    {
+      "id": "class:src/models/patient.py:PatientInfo",
+      "type": "class",
+      "name": "PatientInfo",
+      "filePath": "src/models/patient.py",
+      "summary": "PatientInfo 定义在 src/models/patient.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 61 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:DrugInteractionSeverity",
+      "type": "class",
+      "name": "DrugInteractionSeverity",
+      "filePath": "src/models/treatment.py",
+      "summary": "DrugInteractionSeverity 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 8 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:PrescribedMedication",
+      "type": "class",
+      "name": "PrescribedMedication",
+      "filePath": "src/models/treatment.py",
+      "summary": "PrescribedMedication 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 16 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:DrugInteraction",
+      "type": "class",
+      "name": "DrugInteraction",
+      "filePath": "src/models/treatment.py",
+      "summary": "DrugInteraction 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 27 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:TreatmentPlan",
+      "type": "class",
+      "name": "TreatmentPlan",
+      "filePath": "src/models/treatment.py",
+      "summary": "TreatmentPlan 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 35 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:ICD10Code",
+      "type": "class",
+      "name": "ICD10Code",
+      "filePath": "src/models/treatment.py",
+      "summary": "ICD10Code 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 47 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:DRGGroup",
+      "type": "class",
+      "name": "DRGGroup",
+      "filePath": "src/models/treatment.py",
+      "summary": "DRGGroup 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 54 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:CodingResult",
+      "type": "class",
+      "name": "CodingResult",
+      "filePath": "src/models/treatment.py",
+      "summary": "CodingResult 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 61 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:AuditRecord",
+      "type": "class",
+      "name": "AuditRecord",
+      "filePath": "src/models/treatment.py",
+      "summary": "AuditRecord 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 70 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:ComplianceCheck",
+      "type": "class",
+      "name": "ComplianceCheck",
+      "filePath": "src/models/treatment.py",
+      "summary": "ComplianceCheck 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 82 行附近。"
+    },
+    {
+      "id": "class:src/models/treatment.py:AuditResult",
+      "type": "class",
+      "name": "AuditResult",
+      "filePath": "src/models/treatment.py",
+      "summary": "AuditResult 定义在 src/models/treatment.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 88 行附近。"
+    },
+    {
+      "id": "function:src/services/drug_interaction.py:_normalize_drug",
+      "type": "function",
+      "name": "_normalize_drug",
+      "filePath": "src/services/drug_interaction.py",
+      "summary": "_normalize_drug 定义在 src/services/drug_interaction.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 108 行附近。"
+    },
+    {
+      "id": "function:src/services/drug_interaction.py:check_interactions",
+      "type": "function",
+      "name": "check_interactions",
+      "filePath": "src/services/drug_interaction.py",
+      "summary": "check_interactions 定义在 src/services/drug_interaction.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 117 行附近。"
+    },
+    {
+      "id": "function:src/services/drug_interaction.py:check_allergy_contraindication",
+      "type": "function",
+      "name": "check_allergy_contraindication",
+      "filePath": "src/services/drug_interaction.py",
+      "summary": "check_allergy_contraindication 定义在 src/services/drug_interaction.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 144 行附近。"
+    },
+    {
+      "id": "function:src/services/fhir_service.py:patient_to_fhir",
+      "type": "function",
+      "name": "patient_to_fhir",
+      "filePath": "src/services/fhir_service.py",
+      "summary": "patient_to_fhir 定义在 src/services/fhir_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 22 行附近。"
+    },
+    {
+      "id": "function:src/services/fhir_service.py:diagnosis_to_fhir_condition",
+      "type": "function",
+      "name": "diagnosis_to_fhir_condition",
+      "filePath": "src/services/fhir_service.py",
+      "summary": "diagnosis_to_fhir_condition 定义在 src/services/fhir_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 56 行附近。"
+    },
+    {
+      "id": "function:src/services/fhir_service.py:medication_to_fhir",
+      "type": "function",
+      "name": "medication_to_fhir",
+      "filePath": "src/services/fhir_service.py",
+      "summary": "medication_to_fhir 定义在 src/services/fhir_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 76 行附近。"
+    },
+    {
+      "id": "function:src/services/fhir_service.py:push_to_fhir_server",
+      "type": "function",
+      "name": "push_to_fhir_server",
+      "filePath": "src/services/fhir_service.py",
+      "summary": "push_to_fhir_server 定义在 src/services/fhir_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 102 行附近。"
+    },
+    {
+      "id": "class:src/services/graphrag_service.py:_AwaitableNone",
+      "type": "class",
+      "name": "_AwaitableNone",
+      "filePath": "src/services/graphrag_service.py",
+      "summary": "_AwaitableNone 定义在 src/services/graphrag_service.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 20 行附近。"
+    },
+    {
+      "id": "class:src/services/graphrag_service.py:_AwaitableList",
+      "type": "class",
+      "name": "_AwaitableList",
+      "filePath": "src/services/graphrag_service.py",
+      "summary": "_AwaitableList 定义在 src/services/graphrag_service.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 27 行附近。"
+    },
+    {
+      "id": "class:src/services/graphrag_service.py:GraphRAGService",
+      "type": "class",
+      "name": "GraphRAGService",
+      "filePath": "src/services/graphrag_service.py",
+      "summary": "GraphRAGService 定义在 src/services/graphrag_service.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 67 行附近。"
+    },
+    {
+      "id": "function:src/services/graphrag_service.py:get_graphrag_service",
+      "type": "function",
+      "name": "get_graphrag_service",
+      "filePath": "src/services/graphrag_service.py",
+      "summary": "get_graphrag_service 定义在 src/services/graphrag_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 203 行附近。"
+    },
+    {
+      "id": "function:src/services/graphrag_service.py:_normalize_symptom",
+      "type": "function",
+      "name": "_normalize_symptom",
+      "filePath": "src/services/graphrag_service.py",
+      "summary": "_normalize_symptom 定义在 src/services/graphrag_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 211 行附近。"
+    },
+    {
+      "id": "class:src/services/hipaa_service.py:AuditLogger",
+      "type": "class",
+      "name": "AuditLogger",
+      "filePath": "src/services/hipaa_service.py",
+      "summary": "AuditLogger 定义在 src/services/hipaa_service.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 72 行附近。"
+    },
+    {
+      "id": "function:src/services/hipaa_service.py:detect_phi",
+      "type": "function",
+      "name": "detect_phi",
+      "filePath": "src/services/hipaa_service.py",
+      "summary": "detect_phi 定义在 src/services/hipaa_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 44 行附近。"
+    },
+    {
+      "id": "function:src/services/hipaa_service.py:deidentify_text",
+      "type": "function",
+      "name": "deidentify_text",
+      "filePath": "src/services/hipaa_service.py",
+      "summary": "deidentify_text 定义在 src/services/hipaa_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 54 行附近。"
+    },
+    {
+      "id": "function:src/services/hipaa_service.py:hash_identifier",
+      "type": "function",
+      "name": "hash_identifier",
+      "filePath": "src/services/hipaa_service.py",
+      "summary": "hash_identifier 定义在 src/services/hipaa_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 67 行附近。"
+    },
+    {
+      "id": "function:src/services/hipaa_service.py:get_audit_logger",
+      "type": "function",
+      "name": "get_audit_logger",
+      "filePath": "src/services/hipaa_service.py",
+      "summary": "get_audit_logger 定义在 src/services/hipaa_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 117 行附近。"
+    },
+    {
+      "id": "function:src/services/icd10_service.py:lookup_icd10",
+      "type": "function",
+      "name": "lookup_icd10",
+      "filePath": "src/services/icd10_service.py",
+      "summary": "lookup_icd10 定义在 src/services/icd10_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 119 行附近。"
+    },
+    {
+      "id": "function:src/services/icd10_service.py:search_icd10_by_text",
+      "type": "function",
+      "name": "search_icd10_by_text",
+      "filePath": "src/services/icd10_service.py",
+      "summary": "search_icd10_by_text 定义在 src/services/icd10_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 131 行附近。"
+    },
+    {
+      "id": "function:src/services/icd10_service.py:get_drg_group",
+      "type": "function",
+      "name": "get_drg_group",
+      "filePath": "src/services/icd10_service.py",
+      "summary": "get_drg_group 定义在 src/services/icd10_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 146 行附近。"
+    },
+    {
+      "id": "function:src/services/icd10_service.py:validate_icd10_code",
+      "type": "function",
+      "name": "validate_icd10_code",
+      "filePath": "src/services/icd10_service.py",
+      "summary": "validate_icd10_code 定义在 src/services/icd10_service.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 160 行附近。"
+    },
+    {
+      "id": "class:tests/test_api_stream.py:FakePipeline",
+      "type": "class",
+      "name": "FakePipeline",
+      "filePath": "tests/test_api_stream.py",
+      "summary": "FakePipeline 定义在 tests/test_api_stream.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 7 行附近。"
+    },
+    {
+      "id": "function:tests/test_api_stream.py:test_iter_analyze_events_emits_stage_order_and_done",
+      "type": "function",
+      "name": "test_iter_analyze_events_emits_stage_order_and_done",
+      "filePath": "tests/test_api_stream.py",
+      "summary": "test_iter_analyze_events_emits_stage_order_and_done 定义在 tests/test_api_stream.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 18 行附近。"
+    },
+    {
+      "id": "function:tests/test_api_stream.py:test_iter_analyze_events_emits_error_event",
+      "type": "function",
+      "name": "test_iter_analyze_events_emits_error_event",
+      "filePath": "tests/test_api_stream.py",
+      "summary": "test_iter_analyze_events_emits_error_event 定义在 tests/test_api_stream.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 56 行附近。"
+    },
+    {
+      "id": "function:tests/test_neo4j_integration.py:test_seeded_neo4j_returns_pneumonia_candidate",
+      "type": "function",
+      "name": "test_seeded_neo4j_returns_pneumonia_candidate",
+      "filePath": "tests/test_neo4j_integration.py",
+      "summary": "test_seeded_neo4j_returns_pneumonia_candidate 定义在 tests/test_neo4j_integration.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 12 行附近。"
+    },
+    {
+      "id": "function:tests/test_pipeline_routing.py:test_diagnosis_route_retries_intake_when_more_info_requested",
+      "type": "function",
+      "name": "test_diagnosis_route_retries_intake_when_more_info_requested",
+      "filePath": "tests/test_pipeline_routing.py",
+      "summary": "test_diagnosis_route_retries_intake_when_more_info_requested 定义在 tests/test_pipeline_routing.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 7 行附近。"
+    },
+    {
+      "id": "function:tests/test_pipeline_routing.py:test_diagnosis_route_stops_retrying_after_max_attempts",
+      "type": "function",
+      "name": "test_diagnosis_route_stops_retrying_after_max_attempts",
+      "filePath": "tests/test_pipeline_routing.py",
+      "summary": "test_diagnosis_route_stops_retrying_after_max_attempts 定义在 tests/test_pipeline_routing.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 18 行附近。"
+    },
+    {
+      "id": "function:tests/test_pipeline_routing.py:test_diagnosis_route_continues_when_no_more_info_needed",
+      "type": "function",
+      "name": "test_diagnosis_route_continues_when_no_more_info_needed",
+      "filePath": "tests/test_pipeline_routing.py",
+      "summary": "test_diagnosis_route_continues_when_no_more_info_needed 定义在 tests/test_pipeline_routing.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 29 行附近。"
+    },
+    {
+      "id": "class:tests/test_seed_neo4j_kg.py:RecordingSession",
+      "type": "class",
+      "name": "RecordingSession",
+      "filePath": "tests/test_seed_neo4j_kg.py",
+      "summary": "RecordingSession 定义在 tests/test_seed_neo4j_kg.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 6 行附近。"
+    },
+    {
+      "id": "class:tests/test_seed_neo4j_kg.py:RecordingResult",
+      "type": "class",
+      "name": "RecordingResult",
+      "filePath": "tests/test_seed_neo4j_kg.py",
+      "summary": "RecordingResult 定义在 tests/test_seed_neo4j_kg.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 17 行附近。"
+    },
+    {
+      "id": "function:tests/test_seed_neo4j_kg.py:test_build_seed_rows_contains_pneumonia_graph",
+      "type": "function",
+      "name": "test_build_seed_rows_contains_pneumonia_graph",
+      "filePath": "tests/test_seed_neo4j_kg.py",
+      "summary": "test_build_seed_rows_contains_pneumonia_graph 定义在 tests/test_seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 28 行附近。"
+    },
+    {
+      "id": "function:tests/test_seed_neo4j_kg.py:test_seed_helpers_issue_expected_cypher",
+      "type": "function",
+      "name": "test_seed_helpers_issue_expected_cypher",
+      "filePath": "tests/test_seed_neo4j_kg.py",
+      "summary": "test_seed_helpers_issue_expected_cypher 定义在 tests/test_seed_neo4j_kg.py，承担该文件中的 函数逻辑职责。",
+      "tags": [
+        "function",
+        "python"
+      ],
+      "languageNotes": "符号位于第 39 行附近。"
+    },
+    {
+      "id": "class:tests/test_services.py:TestICD10Service",
+      "type": "class",
+      "name": "TestICD10Service",
+      "filePath": "tests/test_services.py",
+      "summary": "TestICD10Service 定义在 tests/test_services.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 11 行附近。"
+    },
+    {
+      "id": "class:tests/test_services.py:TestDrugInteraction",
+      "type": "class",
+      "name": "TestDrugInteraction",
+      "filePath": "tests/test_services.py",
+      "summary": "TestDrugInteraction 定义在 tests/test_services.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 36 行附近。"
+    },
+    {
+      "id": "class:tests/test_services.py:TestHIPAAService",
+      "type": "class",
+      "name": "TestHIPAAService",
+      "filePath": "tests/test_services.py",
+      "summary": "TestHIPAAService 定义在 tests/test_services.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 57 行附近。"
+    },
+    {
+      "id": "class:tests/test_services.py:TestGraphRAGService",
+      "type": "class",
+      "name": "TestGraphRAGService",
+      "filePath": "tests/test_services.py",
+      "summary": "TestGraphRAGService 定义在 tests/test_services.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 80 行附近。"
+    },
+    {
+      "id": "class:tests/test_services.py:TestIntakeSanitization",
+      "type": "class",
+      "name": "TestIntakeSanitization",
+      "filePath": "tests/test_services.py",
+      "summary": "TestIntakeSanitization 定义在 tests/test_services.py，承担该文件中的 类型/类建模职责。",
+      "tags": [
+        "class",
+        "python"
+      ],
+      "languageNotes": "符号位于第 100 行附近。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frontend/src/api/clinicalApi.test.ts",
+      "target": "file:frontend/src/api/clinicalApi.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "file:frontend/src/types/clinical.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/components/ResultsPanel.test.ts",
+      "target": "file:frontend/src/components/ResultsPanel.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/main.ts",
+      "target": "file:frontend/src/App.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/main.ts",
+      "target": "file:frontend/src/router/index.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/main.ts",
+      "target": "file:frontend/src/styles.css",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/router/index.ts",
+      "target": "file:frontend/src/views/AnalysisView.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/router/index.ts",
+      "target": "file:frontend/src/views/DDIView.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/router/index.ts",
+      "target": "file:frontend/src/views/HealthView.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/router/index.ts",
+      "target": "file:frontend/src/views/ICD10View.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/stores/analysisStore.test.ts",
+      "target": "file:frontend/src/stores/analysisStore.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/stores/analysisStore.ts",
+      "target": "file:frontend/src/api/clinicalApi.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/stores/analysisStore.ts",
+      "target": "file:frontend/src/types/clinical.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "file:src/services/graphrag_service.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/__init__.py",
+      "target": "file:src/agents/audit_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/__init__.py",
+      "target": "file:src/agents/coding_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/__init__.py",
+      "target": "file:src/agents/diagnosis_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/__init__.py",
+      "target": "file:src/agents/intake_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/__init__.py",
+      "target": "file:src/agents/treatment_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/audit_agent.py",
+      "target": "file:src/models/treatment.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/coding_agent.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/diagnosis_agent.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/diagnosis_agent.py",
+      "target": "file:src/services/graphrag_service.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/intake_agent.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/intake_agent.py",
+      "target": "file:src/models/patient.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/agents/treatment_agent.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/api/main.py",
+      "target": "file:src/api/routes.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "file:src/graph/clinical_pipeline.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "file:src/services/drug_interaction.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "file:src/services/icd10_service.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "file:src/agents/audit_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "file:src/agents/coding_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "file:src/agents/diagnosis_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "file:src/agents/intake_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "file:src/agents/treatment_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "file:src/graph/state.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/state.py",
+      "target": "file:src/models/diagnosis.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/state.py",
+      "target": "file:src/models/patient.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/graph/state.py",
+      "target": "file:src/models/treatment.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/services/fhir_service.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:src/services/graphrag_service.py",
+      "target": "file:src/config/settings.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_api_stream.py",
+      "target": "file:src/api/__init__.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_api_stream.py",
+      "target": "file:src/api/routes.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_pipeline_routing.py",
+      "target": "file:src/graph/clinical_pipeline.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_pipeline_routing.py",
+      "target": "file:src/graph/state.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_seed_neo4j_kg.py",
+      "target": "file:scripts/seed_neo4j_kg.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "file:src/agents/intake_agent.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "file:src/services/drug_interaction.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "file:src/services/graphrag_service.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "file:src/services/hipaa_service.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "file:src/services/icd10_service.py",
+      "type": "imports",
+      "weight": 0.7,
+      "description": "源文件导入或引用目标文件。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:requestJson",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:parseSseFrame",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:analyze",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:streamAnalyze",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:searchICD10",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:getICD10",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:checkDDI",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/api/clinicalApi.ts",
+      "target": "function:frontend/src/api/clinicalApi.ts:health",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/stores/analysisStore.ts",
+      "target": "function:frontend/src/stores/analysisStore.ts:createStageStatuses",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:frontend/src/stores/analysisStore.ts",
+      "target": "function:frontend/src/stores/analysisStore.ts:mergePayload",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "function:scripts/seed_neo4j_kg.py:build_seed_rows",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "function:scripts/seed_neo4j_kg.py:reset_graph",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "function:scripts/seed_neo4j_kg.py:create_constraints",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "function:scripts/seed_neo4j_kg.py:seed_graph",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:scripts/seed_neo4j_kg.py",
+      "target": "function:scripts/seed_neo4j_kg.py:main",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/audit_agent.py",
+      "target": "function:src/agents/audit_agent.py:_scan_for_phi",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/audit_agent.py",
+      "target": "function:src/agents/audit_agent.py:_mask_phi",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/audit_agent.py",
+      "target": "function:src/agents/audit_agent.py:_create_audit_record",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/audit_agent.py",
+      "target": "function:src/agents/audit_agent.py:audit_agent",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/coding_agent.py",
+      "target": "function:src/agents/coding_agent.py:coding_agent",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/diagnosis_agent.py",
+      "target": "function:src/agents/diagnosis_agent.py:_extract_symptom_names",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/diagnosis_agent.py",
+      "target": "function:src/agents/diagnosis_agent.py:_format_graphrag_context",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/diagnosis_agent.py",
+      "target": "function:src/agents/diagnosis_agent.py:diagnosis_agent",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/intake_agent.py",
+      "target": "function:src/agents/intake_agent.py:_sanitize_patient_data",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/intake_agent.py",
+      "target": "function:src/agents/intake_agent.py:intake_agent",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/agents/treatment_agent.py",
+      "target": "function:src/agents/treatment_agent.py:treatment_agent",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/main.py",
+      "target": "function:src/api/main.py:health_check",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "class:src/api/routes.py:AnalyzeRequest",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "class:src/api/routes.py:AnalyzeResponse",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "class:src/api/routes.py:ICD10SearchRequest",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "class:src/api/routes.py:DDICheckRequest",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:_sse_message",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:_coerce_chunk_state",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:iter_analyze_events",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:sse_analyze_messages",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:analyze_patient",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:stream_analyze_patient",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:search_icd10",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:get_icd10",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/api/routes.py",
+      "target": "function:src/api/routes.py:check_ddi",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/config/settings.py",
+      "target": "class:src/config/settings.py:Settings",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/config/settings.py",
+      "target": "function:src/config/settings.py:get_settings",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "function:src/graph/clinical_pipeline.py:_route_after_diagnosis",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "function:src/graph/clinical_pipeline.py:build_clinical_pipeline",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/graph/clinical_pipeline.py",
+      "target": "function:src/graph/clinical_pipeline.py:get_pipeline",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/graph/state.py",
+      "target": "class:src/graph/state.py:ClinicalState",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/graph/state.py",
+      "target": "function:src/graph/state.py:_merge_lists",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/diagnosis.py",
+      "target": "class:src/models/diagnosis.py:DiagnosisCandidate",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/diagnosis.py",
+      "target": "class:src/models/diagnosis.py:DifferentialDiagnosis",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:Gender",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:Severity",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:Symptom",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:Allergy",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:Medication",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:VitalSigns",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:LabResult",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/patient.py",
+      "target": "class:src/models/patient.py:PatientInfo",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:DrugInteractionSeverity",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:PrescribedMedication",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:DrugInteraction",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:TreatmentPlan",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:ICD10Code",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:DRGGroup",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:CodingResult",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:AuditRecord",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:ComplianceCheck",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/models/treatment.py",
+      "target": "class:src/models/treatment.py:AuditResult",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/drug_interaction.py",
+      "target": "function:src/services/drug_interaction.py:_normalize_drug",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/drug_interaction.py",
+      "target": "function:src/services/drug_interaction.py:check_interactions",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/drug_interaction.py",
+      "target": "function:src/services/drug_interaction.py:check_allergy_contraindication",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/fhir_service.py",
+      "target": "function:src/services/fhir_service.py:patient_to_fhir",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/fhir_service.py",
+      "target": "function:src/services/fhir_service.py:diagnosis_to_fhir_condition",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/fhir_service.py",
+      "target": "function:src/services/fhir_service.py:medication_to_fhir",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/fhir_service.py",
+      "target": "function:src/services/fhir_service.py:push_to_fhir_server",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/graphrag_service.py",
+      "target": "class:src/services/graphrag_service.py:_AwaitableNone",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/graphrag_service.py",
+      "target": "class:src/services/graphrag_service.py:_AwaitableList",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/graphrag_service.py",
+      "target": "class:src/services/graphrag_service.py:GraphRAGService",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/graphrag_service.py",
+      "target": "function:src/services/graphrag_service.py:get_graphrag_service",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/graphrag_service.py",
+      "target": "function:src/services/graphrag_service.py:_normalize_symptom",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/hipaa_service.py",
+      "target": "class:src/services/hipaa_service.py:AuditLogger",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/hipaa_service.py",
+      "target": "function:src/services/hipaa_service.py:detect_phi",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/hipaa_service.py",
+      "target": "function:src/services/hipaa_service.py:deidentify_text",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/hipaa_service.py",
+      "target": "function:src/services/hipaa_service.py:hash_identifier",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/hipaa_service.py",
+      "target": "function:src/services/hipaa_service.py:get_audit_logger",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/icd10_service.py",
+      "target": "function:src/services/icd10_service.py:lookup_icd10",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/icd10_service.py",
+      "target": "function:src/services/icd10_service.py:search_icd10_by_text",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/icd10_service.py",
+      "target": "function:src/services/icd10_service.py:get_drg_group",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:src/services/icd10_service.py",
+      "target": "function:src/services/icd10_service.py:validate_icd10_code",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_api_stream.py",
+      "target": "class:tests/test_api_stream.py:FakePipeline",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_api_stream.py",
+      "target": "function:tests/test_api_stream.py:test_iter_analyze_events_emits_stage_order_and_done",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_api_stream.py",
+      "target": "function:tests/test_api_stream.py:test_iter_analyze_events_emits_error_event",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_neo4j_integration.py",
+      "target": "function:tests/test_neo4j_integration.py:test_seeded_neo4j_returns_pneumonia_candidate",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_pipeline_routing.py",
+      "target": "function:tests/test_pipeline_routing.py:test_diagnosis_route_retries_intake_when_more_info_requested",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_pipeline_routing.py",
+      "target": "function:tests/test_pipeline_routing.py:test_diagnosis_route_stops_retrying_after_max_attempts",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_pipeline_routing.py",
+      "target": "function:tests/test_pipeline_routing.py:test_diagnosis_route_continues_when_no_more_info_needed",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_seed_neo4j_kg.py",
+      "target": "class:tests/test_seed_neo4j_kg.py:RecordingSession",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_seed_neo4j_kg.py",
+      "target": "class:tests/test_seed_neo4j_kg.py:RecordingResult",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_seed_neo4j_kg.py",
+      "target": "function:tests/test_seed_neo4j_kg.py:test_build_seed_rows_contains_pneumonia_graph",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_seed_neo4j_kg.py",
+      "target": "function:tests/test_seed_neo4j_kg.py:test_seed_helpers_issue_expected_cypher",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "class:tests/test_services.py:TestICD10Service",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "class:tests/test_services.py:TestDrugInteraction",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "class:tests/test_services.py:TestHIPAAService",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "class:tests/test_services.py:TestGraphRAGService",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "file:tests/test_services.py",
+      "target": "class:tests/test_services.py:TestIntakeSanitization",
+      "type": "contains",
+      "weight": 1,
+      "description": "文件包含该符号定义。"
+    },
+    {
+      "source": "document:README-python.md",
+      "target": "file:src/api/main.py",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "README 说明后端启动入口。"
+    },
+    {
+      "source": "document:README-python.md",
+      "target": "file:frontend/src/main.ts",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "README 说明前端工作台入口。"
+    },
+    {
+      "source": "config:docker-compose.yml",
+      "target": "service:Dockerfile",
+      "type": "configures",
+      "weight": 0.6,
+      "description": "Compose 文件配置 Python 服务镜像构建。"
+    },
+    {
+      "source": "config:.env.example",
+      "target": "file:src/config/settings.py",
+      "type": "configures",
+      "weight": 0.6,
+      "description": "环境变量样例对应应用配置读取。"
+    },
+    {
+      "source": "document:requirements.txt",
+      "target": "file:src/api/main.py",
+      "type": "configures",
+      "weight": 0.6,
+      "description": "依赖清单支撑后端运行环境。"
+    },
+    {
+      "source": "config:frontend/package.json",
+      "target": "file:frontend/src/main.ts",
+      "type": "configures",
+      "weight": 0.6,
+      "description": "前端 package 脚本和依赖支撑 Vite 入口。"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:backend-api",
+      "name": "后端 API 层",
+      "description": "FastAPI 入口、路由和 HTTP 接口边界。",
+      "nodeIds": [
+        "file:src/api/__init__.py",
+        "file:src/api/main.py",
+        "file:src/api/routes.py"
+      ]
+    },
+    {
+      "id": "layer:agent-orchestration",
+      "name": "Agent 编排层",
+      "description": "五个临床 Agent、LangGraph 状态和流水线编排。",
+      "nodeIds": [
+        "file:src/agents/__init__.py",
+        "file:src/agents/audit_agent.py",
+        "file:src/agents/coding_agent.py",
+        "file:src/agents/diagnosis_agent.py",
+        "file:src/agents/intake_agent.py",
+        "file:src/agents/treatment_agent.py",
+        "file:src/graph/__init__.py",
+        "file:src/graph/clinical_pipeline.py",
+        "file:src/graph/state.py"
+      ]
+    },
+    {
+      "id": "layer:clinical-domain-services",
+      "name": "临床领域服务层",
+      "description": "ICD-10、FHIR、HIPAA、GraphRAG、DDI、模型和数据脚本。",
+      "nodeIds": [
+        "config:data/sample_patients.json",
+        "file:scripts/seed_neo4j_kg.py",
+        "file:src/__init__.py",
+        "file:src/config/__init__.py",
+        "file:src/config/settings.py",
+        "file:src/models/__init__.py",
+        "file:src/models/diagnosis.py",
+        "file:src/models/patient.py",
+        "file:src/models/treatment.py",
+        "file:src/services/__init__.py",
+        "file:src/services/drug_interaction.py",
+        "file:src/services/fhir_service.py",
+        "file:src/services/graphrag_service.py",
+        "file:src/services/hipaa_service.py",
+        "file:src/services/icd10_service.py"
+      ]
+    },
+    {
+      "id": "layer:frontend-workbench",
+      "name": "前端工作台层",
+      "description": "Vue 3 演示工作台、页面、组件、状态和 API 客户端。",
+      "nodeIds": [
+        "config:frontend/.env.example",
+        "file:frontend/index.html",
+        "config:frontend/package.json",
+        "file:frontend/src/api/clinicalApi.test.ts",
+        "file:frontend/src/api/clinicalApi.ts",
+        "file:frontend/src/App.vue",
+        "file:frontend/src/components/JsonPreview.vue",
+        "file:frontend/src/components/ResultsPanel.test.ts",
+        "file:frontend/src/components/ResultsPanel.vue",
+        "file:frontend/src/components/StageProgress.vue",
+        "file:frontend/src/main.ts",
+        "file:frontend/src/router/index.ts",
+        "file:frontend/src/stores/analysisStore.test.ts",
+        "file:frontend/src/stores/analysisStore.ts",
+        "file:frontend/src/styles.css",
+        "file:frontend/src/test/setup.ts",
+        "file:frontend/src/types/clinical.ts",
+        "file:frontend/src/views/AnalysisView.vue",
+        "file:frontend/src/views/DDIView.vue",
+        "file:frontend/src/views/HealthView.vue",
+        "file:frontend/src/views/ICD10View.vue",
+        "file:frontend/src/vite-env.d.ts",
+        "config:frontend/tsconfig.json",
+        "config:frontend/tsconfig.node.json",
+        "file:frontend/vite.config.d.ts",
+        "file:frontend/vite.config.js",
+        "file:frontend/vite.config.ts",
+        "file:frontend/vitest.config.d.ts",
+        "file:frontend/vitest.config.js",
+        "file:frontend/vitest.config.ts"
+      ]
+    },
+    {
+      "id": "layer:test-verification",
+      "name": "测试验证层",
+      "description": "后端与前端测试，验证服务、API、流水线和集成行为。",
+      "nodeIds": [
+        "file:tests/__init__.py",
+        "file:tests/.generated_graphrag_import/icd10_codes.csv",
+        "file:tests/.generated_graphrag_import/snomed_concepts.csv",
+        "file:tests/.generated_graphrag_import/snomed_definitions.csv",
+        "file:tests/.generated_graphrag_import/snomed_icd10_maps.csv",
+        "file:tests/.generated_graphrag_import/snomed_is_a.csv",
+        "file:tests/.generated_graphrag_import/snomed_relationships.csv",
+        "file:tests/.generated_graphrag_import/snomed_terms.csv",
+        "file:tests/.generated_graphrag_import/umls_concepts.csv",
+        "file:tests/.generated_graphrag_import/umls_same_as.csv",
+        "file:tests/.generated_graphrag_import/umls_snomed_aliases.csv",
+        "file:tests/.generated_graphrag_import/umls_terms.csv",
+        "config:tests/.generated_icd10cm/icd10cm_codes_2026.json",
+        "file:tests/.generated_umls_import/concept_semantic_types.csv",
+        "file:tests/.generated_umls_import/concepts.csv",
+        "file:tests/.generated_umls_import/definitions.csv",
+        "file:tests/.generated_umls_import/relationships.csv",
+        "file:tests/.generated_umls_import/semantic_types.csv",
+        "file:tests/.generated_umls_import/source_codes.csv",
+        "file:tests/.generated_umls_import/terms.csv",
+        "file:tests/test_api_stream.py",
+        "file:tests/test_neo4j_integration.py",
+        "file:tests/test_pipeline_routing.py",
+        "file:tests/test_seed_neo4j_kg.py",
+        "file:tests/test_services.py"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "文档与学习资料层",
+      "description": "中文项目说明、技术文档和学习导览材料。",
+      "nodeIds": [
+        "document:docs/00-项目概览.md",
+        "document:docs/01-环境搭建指南.md",
+        "document:docs/02-架构设计详解.md",
+        "document:docs/03-Agent设计原理.md",
+        "document:docs/04-GraphRAG知识图谱.md",
+        "document:docs/05-FHIR-API集成.md",
+        "document:docs/06-HIPAA合规设计.md",
+        "document:docs/07-部署运维指南.md",
+        "document:README-python.md",
+        "document:resume_project_intro.md"
+      ]
+    },
+    {
+      "id": "layer:configuration-operations",
+      "name": "配置与运维层",
+      "description": "运行配置、依赖清单、Docker 和本地环境样例。",
+      "nodeIds": [
+        "config:.env.example",
+        "config:docker-compose.yml",
+        "service:Dockerfile",
+        "document:requirements.txt"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "项目总览",
+      "description": "从 README 和项目概览文档理解这个 Python 版多 Agent 临床决策系统的目标、启动方式和主要能力。",
+      "nodeIds": [
+        "document:README-python.md",
+        "document:docs/00-项目概览.md"
+      ],
+      "languageLesson": "先识别业务闭环：接诊、诊断、治疗、编码、审计。"
+    },
+    {
+      "order": 2,
+      "title": "后端入口与 API",
+      "description": "查看 FastAPI 应用如何暴露临床分析、流式分析、ICD-10 查询、DDI 检查和健康检查。",
+      "nodeIds": [
+        "file:src/api/main.py",
+        "file:src/api/routes.py"
+      ],
+      "languageLesson": "API 层是外部请求进入 Agent 流水线的边界。"
+    },
+    {
+      "order": 3,
+      "title": "Agent 流水线",
+      "description": "沿着 LangGraph 状态和临床流水线理解五个专科 Agent 的协作方式。",
+      "nodeIds": [
+        "file:src/graph/state.py",
+        "file:src/graph/clinical_pipeline.py",
+        "file:src/agents/intake_agent.py",
+        "file:src/agents/diagnosis_agent.py"
+      ],
+      "languageLesson": "编排层负责把单点推理组织成可追踪的医疗流程。"
+    },
+    {
+      "order": 4,
+      "title": "领域服务",
+      "description": "深入 ICD-10、GraphRAG、FHIR、HIPAA 和药物相互作用服务，理解系统如何连接医学知识、合规和互操作标准。",
+      "nodeIds": [
+        "file:src/services/icd10_service.py",
+        "file:src/services/graphrag_service.py",
+        "file:src/services/hipaa_service.py",
+        "file:src/services/drug_interaction.py"
+      ],
+      "languageLesson": "领域服务把医疗知识、数据标准和安全策略隔离在可测试模块中。"
+    },
+    {
+      "order": 5,
+      "title": "前端工作台",
+      "description": "查看 Vue 工作台如何调用后端、展示阶段进度并呈现分析结果。",
+      "nodeIds": [
+        "file:frontend/src/main.ts",
+        "file:frontend/src/App.vue",
+        "file:frontend/src/stores/analysisStore.ts",
+        "file:frontend/src/api/clinicalApi.ts"
+      ],
+      "languageLesson": "前端层把流水线状态转化为可观察、可演示的交互体验。"
+    },
+    {
+      "order": 6,
+      "title": "测试与运行保障",
+      "description": "最后查看测试、Docker 和环境配置，理解项目如何验证核心流程并支持本地启动。",
+      "nodeIds": [
+        "file:tests/test_pipeline_routing.py",
+        "file:tests/test_services.py",
+        "config:.env.example"
+      ],
+      "languageLesson": "验证层和运维层让 Agent 系统从演示代码走向可重复运行。"
+    }
+  ]
+}

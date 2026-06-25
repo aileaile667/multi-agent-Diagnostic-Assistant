@@ -40,3 +40,58 @@ docker-compose up -d
 ```bash
 pytest tests/ -v
 ```
+
+## Vue Frontend Workbench
+
+The Python implementation includes a Vue 3 demo workbench in `frontend/`.
+
+```bash
+# Backend
+uvicorn src.api.main:app --reload --port 8000
+
+# Frontend
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`. Vite proxies `/api` and `/health` to
+`http://localhost:8000`.
+
+Frontend environment:
+
+```bash
+VITE_API_BASE_URL=/api/v1
+```
+
+Streaming analysis endpoint:
+
+```http
+POST /api/v1/clinical/analyze/stream
+Content-Type: application/json
+Accept: text/event-stream
+```
+
+Request body:
+
+```json
+{
+  "patient_description": "Patient narrative...",
+  "thread_id": "demo-001"
+}
+```
+
+Each Server-Sent Event uses this data payload:
+
+```json
+{
+  "thread_id": "demo-001",
+  "stage": "intake",
+  "status": "completed",
+  "payload": {},
+  "errors": []
+}
+```
+
+Valid stages are `intake`, `diagnosis`, `treatment`, `coding`, `audit`,
+`done`, and `error`.

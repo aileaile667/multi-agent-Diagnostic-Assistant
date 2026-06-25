@@ -5,6 +5,12 @@ venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/*.tsbuildinfo
+frontend/*.js
+frontend/*.d.ts
 data/umls/rrf/
 data/umls/import/
 data/graphrag/import/
