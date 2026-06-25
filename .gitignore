@@ -1,7 +1,14 @@
 .env
+.tmp/
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+data/umls/rrf/
+data/umls/import/
+data/graphrag/import/
+tests/.generated_umls_import/
+tests/.generated_graphrag_import/
+tests/.generated_icd10cm/
 _codex_backup_*.zip

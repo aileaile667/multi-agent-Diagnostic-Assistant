@@ -1,0 +1,19 @@
+{
+  "version": "FY2026-test",
+  "source": "fixture",
+  "code_count": 2,
+  "codes": [
+    {
+      "code": "J18.9",
+      "raw_code": "J189",
+      "description": "Pneumonia, unspecified organism",
+      "category": "Diseases of the respiratory system"
+    },
+    {
+      "code": "A41.9",
+      "raw_code": "A419",
+      "description": "Sepsis, unspecified organism",
+      "category": "Certain infectious and parasitic diseases"
+    }
+  ]
+}
