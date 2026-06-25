@@ -1,11 +1,11 @@
 """
-Coding Agent — ICD-10 automatic coding and DRGs grouping.
+Coding Agent（编码Agent） — ICD-10自动编码和DRGs分组。
 
-Responsibilities:
-  - Map diagnoses to ICD-10-CM codes with high precision
-  - Determine DRGs grouping based on principal diagnosis + procedures
-  - Provide coding confidence scores and rationale
-  - Cross-validate codes against diagnosis descriptions
+职责：
+  - 将诊断结果高精度地映射到ICD-10-CM编码中
+  - 根据主要诊断+手术确定DRGs分组
+  - 提供编码置信度评分和理由
+  - 根据诊断描述对编码进行交叉验证
 """
 
 from __future__ import annotations
@@ -57,9 +57,9 @@ Rules:
 
 def coding_agent(state) -> dict:
     """
-    LangGraph node: Assign ICD-10 codes and DRGs grouping.
-    Reads: state.diagnosis, state.treatment_plan
-    Writes: state.coding_result, state.current_agent
+    LangGraph节点：分配ICD-10代码和DRGs分组。
+    读取：state.diagnosis, state.treatment_plan
+    写入：state.coding_result, state.current_agent
     """
     logger.info("coding_agent.start")
 
@@ -75,9 +75,12 @@ def coding_agent(state) -> dict:
 
     settings = get_settings()
     llm = ChatOpenAI(
-        model=settings.openai_model,
-        api_key=settings.openai_api_key,
+        model=settings.llm_model,
+        api_key=settings.llm_api_key,
+        base_url=settings.llm_base_url,
         temperature=0.1,
+        timeout=settings.llm_timeout_seconds,
+        max_retries=settings.llm_max_retries,
     )
 
     context = json.dumps(

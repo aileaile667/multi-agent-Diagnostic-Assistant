@@ -1,12 +1,11 @@
 """
-ICD-10 coding service — Automated medical code assignment.
+ICD-10编码服务 — 自动分配医疗编码。
 
-Provides:
-  - Text-to-ICD-10 code mapping
-  - Code validation and hierarchy lookup
-  - DRGs grouping logic based on ICD-10 + procedure codes
+提供：
+  - 文本到ICD-10编码的映射
+  - 代码验证和层次结构查找
+  - 基于ICD-10和手术代码的DRGs（疾病诊断相关分组）分组逻辑
 """
-
 from __future__ import annotations
 import structlog
 

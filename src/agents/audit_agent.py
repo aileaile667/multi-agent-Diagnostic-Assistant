@@ -1,12 +1,12 @@
 """
-Audit Agent — HIPAA compliance checking and data de-identification.
+审计agent — HIPAA 合规性检查和数据去标识化。
 
-Responsibilities:
-  - Scan all pipeline outputs for PHI (Protected Health Information)
-  - Verify compliance with HIPAA Safe Harbor de-identification (18 identifiers)
-  - Generate immutable audit trail records
-  - Apply data masking to sensitive fields
-  - Produce compliance report with risk assessment
+职责：
+  - 扫描所有管道输出以查找PHI（受保护的健康信息）
+  - 验证是否符合HIPAA安全港去标识化要求（18个标识符）
+  - 生成不可变的审计追踪记录
+  - 对敏感字段应用数据掩码
+  - 编制包含风险评估的合规报告
 """
 
 from __future__ import annotations

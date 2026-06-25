@@ -10,6 +10,7 @@ Endpoints:
 
 from __future__ import annotations
 from fastapi import APIRouter, HTTPException
+from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 from ..graph.clinical_pipeline import get_pipeline
@@ -72,9 +73,13 @@ async def analyze_patient(req: AnalyzeRequest):
     pipeline = get_pipeline()
 
     try:
-        result = pipeline.invoke(
+        result = await run_in_threadpool(
+            pipeline.invoke,
             {"raw_input": req.patient_description},
-            config={"configurable": {"thread_id": req.thread_id}},
+            config={
+                "configurable": {"thread_id": req.thread_id},
+                "recursion_limit": 10,
+            },
         )
         return AnalyzeResponse(
             patient_info=result.get("patient_info"),

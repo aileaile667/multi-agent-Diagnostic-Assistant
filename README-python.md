@@ -10,7 +10,7 @@ pip install -r requirements.txt
 
 # 2. 配置环境变量
 cp .env.example .env
-# 编辑 .env 填入你的 OpenAI API Key
+# 编辑 .env 填入你的 DeepSeek API Key
 
 # 3. 启动服务
 uvicorn src.api.main:app --reload --port 8000

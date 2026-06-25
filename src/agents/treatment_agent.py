@@ -1,12 +1,12 @@
 """
-Treatment Agent — Evidence-based treatment recommendation.
+Treatment Agent（治疗Agent）——基于证据的治疗建议。
 
-Responsibilities:
-  - Generate treatment plan based on confirmed diagnosis
-  - Check drug-drug interactions (DDI)
-  - Verify contraindications against patient allergies / history
-  - Provide non-pharmacological treatment suggestions
-  - Include evidence references for each recommendation
+职责：
+  - 根据确诊结果制定治疗方案
+  - 检查药物相互作用（DDI）
+  - 核实患者过敏史/病史中的禁忌症
+  - 提供非药物治疗建议
+  - 为每项建议提供证据参考
 """
 
 from __future__ import annotations
@@ -62,9 +62,9 @@ Rules:
 
 def treatment_agent(state) -> dict:
     """
-    LangGraph node: Generate treatment plan.
-    Reads: state.patient_info, state.diagnosis
-    Writes: state.treatment_plan, state.current_agent
+    LangGraph节点：生成治疗计划。
+    读取：state.patient_info, state.diagnosis
+    写入：state.treatment_plan, state.current_agent
     """
     logger.info("treatment_agent.start")
 
@@ -80,9 +80,12 @@ def treatment_agent(state) -> dict:
 
     settings = get_settings()
     llm = ChatOpenAI(
-        model=settings.openai_model,
-        api_key=settings.openai_api_key,
+        model=settings.llm_model,
+        api_key=settings.llm_api_key,
+        base_url=settings.llm_base_url,
         temperature=0.2,
+        timeout=settings.llm_timeout_seconds,
+        max_retries=settings.llm_max_retries,
     )
 
     context = json.dumps(

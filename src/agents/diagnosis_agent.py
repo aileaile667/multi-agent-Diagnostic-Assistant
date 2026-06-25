@@ -1,12 +1,12 @@
 """
-Diagnosis Agent — Differential diagnosis based on structured patient data.
+ Diagnosis Agent（诊断Agent）——基于结构化患者数据的鉴别诊断。
 
-Responsibilities:
-  - Analyze symptoms + lab results against medical knowledge
-  - Generate ranked differential diagnosis list with confidence scores
-  - Provide evidence chains for each candidate diagnosis
-  - Recommend additional tests if information is insufficient
-  - Integrates with GraphRAG knowledge graph when available
+职责：
+  - 根据医学知识分析症状和实验室结果
+  - 生成带有置信度评分的排序鉴别诊断列表
+  - 为每个候选诊断提供证据链
+  - 如果信息不充分，建议进行额外测试
+  - 在可用时与GraphRAG知识图谱集成
 """
 
 from __future__ import annotations
@@ -56,7 +56,7 @@ Rules:
 
 def diagnosis_agent(state) -> dict:
     """
-    LangGraph node: Generate differential diagnosis from patient info.
+    LangGraph节点：根据患者信息生成鉴别诊断。
     Reads: state.patient_info
     Writes: state.diagnosis, state.needs_more_info, state.current_agent
     """
@@ -73,9 +73,12 @@ def diagnosis_agent(state) -> dict:
 
     settings = get_settings()
     llm = ChatOpenAI(
-        model=settings.openai_model,
-        api_key=settings.openai_api_key,
+        model=settings.llm_model,
+        api_key=settings.llm_api_key,
+        base_url=settings.llm_base_url,
         temperature=0.2,
+        timeout=settings.llm_timeout_seconds,
+        max_retries=settings.llm_max_retries,
     )
 
     patient_summary = json.dumps(patient_info, indent=2, ensure_ascii=False)

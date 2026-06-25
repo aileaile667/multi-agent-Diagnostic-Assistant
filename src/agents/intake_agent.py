@@ -1,11 +1,11 @@
 """
-Intake Agent — Patient information collection and structuring.
+Intake Agent（接诊Agent） — 患者信息收集与整理。
 
-Responsibilities:
-  - Parse raw patient description into structured PatientInfo
-  - Extract chief complaint, symptoms, medical history
-  - Normalize data into FHIR-aligned format
-  - Validate completeness of critical fields
+职责：
+  - 将原始患者描述解析为结构化的PatientInfo
+  - 提取主诉、症状、病史
+  - 将数据标准化为符合FHIR标准的格式
+  - 验证关键字段的完整性
 """
 
 from __future__ import annotations
@@ -60,9 +60,9 @@ Rules:
 
 def intake_agent(state) -> dict:
     """
-    LangGraph node: Parse raw patient input into structured data.
-    Reads: state.raw_input
-    Writes: state.patient_info, state.current_agent
+    LangGraph节点：将原始患者输入解析为结构化数据。
+    读取：state.raw_input
+    写入：state.patient_info，state.current_agent
     """
     logger.info("intake_agent.start", raw_input_len=len(state.raw_input or ""))
 
@@ -76,9 +76,12 @@ def intake_agent(state) -> dict:
 
     settings = get_settings()
     llm = ChatOpenAI(
-        model=settings.openai_model,
-        api_key=settings.openai_api_key,
+        model=settings.llm_model,
+        api_key=settings.llm_api_key,
+        base_url=settings.llm_base_url,
         temperature=0.1,
+        timeout=settings.llm_timeout_seconds,
+        max_retries=settings.llm_max_retries,
     )
 
     messages = [

@@ -6,8 +6,16 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # LLM
+    deepseek_api_key: str = ""
+    deepseek_model: str = "deepseek-v4-flash"
+    deepseek_base_url: str = "https://api.deepseek.com"
+    llm_timeout_seconds: float = 60.0
+    llm_max_retries: int = 1
+
+    # Legacy OpenAI env vars are kept as a fallback so older .env files do not
+    # fail during startup while migrating to DeepSeek.
     openai_api_key: str = ""
-    openai_model: str = "gpt-4o-mini"
+    openai_model: str = ""
 
     # PostgreSQL
     postgres_host: str = "localhost"
@@ -39,6 +47,18 @@ class Settings(BaseSettings):
             f"postgresql://{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
         )
+
+    @property
+    def llm_api_key(self) -> str:
+        return self.deepseek_api_key or self.openai_api_key
+
+    @property
+    def llm_model(self) -> str:
+        return self.deepseek_model or self.openai_model
+
+    @property
+    def llm_base_url(self) -> str:
+        return self.deepseek_base_url
 
     class Config:
         env_file = ".env"

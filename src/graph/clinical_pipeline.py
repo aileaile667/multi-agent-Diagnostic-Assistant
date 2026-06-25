@@ -1,10 +1,10 @@
 """
-LangGraph clinical decision pipeline orchestrator.
+LangGraph临床决策流程编排器。
 
-Wires the five agents into a sequential pipeline with conditional routing:
+将五个代理通过条件路由连接成一个顺序管道：
 
-    Intake -> Diagnosis --(needs_more_info?)--> Intake (loop back)
-                       \--(ready)-----------> Treatment -> Coding -> Audit -> END
+    受理 -> 诊断 --(需要更多信息？)--> 受理（循环返回）
+                       ---（准备就绪）--> 处理 --> 编码 --> 审核 --> 结束
 """
 
 from __future__ import annotations

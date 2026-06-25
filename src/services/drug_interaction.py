@@ -1,11 +1,11 @@
 """
-Drug interaction checking service.
+药物相互作用检查服务。
 
-Checks for:
-  - Drug-drug interactions (DDI)
-  - Drug-allergy contraindications
-  - Drug-condition contraindications
-  - Dosage range validation
+检查：
+  - 药物相互作用（DDI）
+  - 药物过敏禁忌症
+  - 药物-病情禁忌症
+  - 剂量范围验证
 """
 
 from __future__ import annotations
