@@ -8,19 +8,19 @@ import type {
 } from "@/types/clinical";
 
 export const sampleCase = [
-  "45-year-old male presenting with fever 39.2 C for 3 days, productive cough",
-  "with yellow sputum, and right-sided chest pain. History of type 2 diabetes",
-  "and hypertension. Current medications: metformin 500mg BID, lisinopril",
-  "10mg daily. Allergies: penicillin rash. Labs: WBC 15000/uL, CRP 85 mg/L,",
-  "chest X-ray shows right lower lobe infiltrate.",
+  "45岁男性，发热39.2 C已3天，伴有咳黄痰和右侧胸痛。",
+  "既往有2型糖尿病和高血压病史。",
+  "当前用药：二甲双胍500mg每日两次，赖诺普利10mg每日一次。",
+  "过敏史：青霉素皮疹。实验室检查：WBC 15000/uL，CRP 85 mg/L。",
+  "胸片提示右下肺叶浸润影。",
 ].join(" ");
 
 export const agentStages: Array<{ key: AgentStage; label: string; description: string }> = [
-  { key: "intake", label: "Intake", description: "Extract patient facts" },
-  { key: "diagnosis", label: "Diagnosis", description: "Rank differential diagnosis" },
-  { key: "treatment", label: "Treatment", description: "Plan care and medications" },
-  { key: "coding", label: "Coding", description: "Map ICD-10 and DRG" },
-  { key: "audit", label: "Audit", description: "Check HIPAA signals" },
+  { key: "intake", label: "问诊采集", description: "提取患者关键事实" },
+  { key: "diagnosis", label: "鉴别诊断", description: "排序可能诊断并给出依据" },
+  { key: "treatment", label: "治疗建议", description: "制定照护与用药方案" },
+  { key: "coding", label: "医学编码", description: "映射 ICD-10 与 DRG" },
+  { key: "audit", label: "合规审计", description: "检查 HIPAA 风险信号" },
 ];
 
 function createStageStatuses(): Record<AgentStage, StageStatus> {
@@ -93,7 +93,7 @@ export const useAnalysisStore = defineStore("analysis", {
     },
     applyStreamEvent(event: StreamEvent) {
       if (event.stage === "error") {
-        this.error = event.errors.join("; ") || "Pipeline stream failed.";
+        this.error = event.errors.join("; ") || "流水线流式执行失败。";
         return;
       }
 
@@ -135,7 +135,7 @@ export const useAnalysisStore = defineStore("analysis", {
           this.error =
             fallbackError instanceof Error
               ? fallbackError.message
-              : "Clinical analysis failed.";
+              : "临床分析失败。";
         } finally {
           this.isRunning = false;
         }

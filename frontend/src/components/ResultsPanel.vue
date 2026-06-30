@@ -21,7 +21,7 @@ function asArray(value: unknown): unknown[] {
   return Array.isArray(value) ? value : [];
 }
 
-function text(value: unknown, fallback = "Not available"): string {
+function text(value: unknown, fallback = "暂无数据"): string {
   if (value === null || value === undefined || value === "") {
     return fallback;
   }
@@ -32,61 +32,61 @@ function text(value: unknown, fallback = "Not available"): string {
 <template>
   <div class="result-grid">
     <section class="result-card">
-      <h3>Patient summary</h3>
+      <h3>患者摘要</h3>
       <div v-if="result.patient_info" class="kv-grid">
         <div class="kv">
-          <span>Name</span>
+          <span>姓名</span>
           <strong>{{ text(patient.name) }}</strong>
         </div>
         <div class="kv">
-          <span>Age / Gender</span>
+          <span>年龄 / 性别</span>
           <strong>{{ text(patient.age) }} / {{ text(patient.gender) }}</strong>
         </div>
         <div class="kv">
-          <span>Chief complaint</span>
+          <span>主诉</span>
           <strong>{{ text(patient.chief_complaint) }}</strong>
         </div>
         <div class="kv">
-          <span>Current medications</span>
+          <span>当前用药数量</span>
           <strong>{{ asArray(patient.current_medications).length }}</strong>
         </div>
       </div>
-      <p v-else class="empty-state">Patient intake output will appear here.</p>
+      <p v-else class="empty-state">问诊采集结果将在此显示。</p>
     </section>
 
     <section class="result-card">
-      <h3>Diagnosis</h3>
+      <h3>诊断</h3>
       <div v-if="result.diagnosis">
         <div class="kv-grid">
           <div class="kv">
-            <span>Primary diagnosis</span>
+            <span>主要诊断</span>
             <strong>{{ text(primaryDiagnosis.disease_name) }}</strong>
           </div>
           <div class="kv">
-            <span>Confidence</span>
+            <span>置信度</span>
             <strong>{{ text(primaryDiagnosis.confidence) }}</strong>
           </div>
         </div>
-        <h3>Recommended tests</h3>
+        <h3>建议检查</h3>
         <ul class="list">
           <li v-for="item in asArray(diagnosis.recommended_tests)" :key="String(item)">
             {{ item }}
           </li>
         </ul>
       </div>
-      <p v-else class="empty-state">Diagnosis output will appear here.</p>
+      <p v-else class="empty-state">诊断结果将在此显示。</p>
     </section>
 
     <section class="result-card">
-      <h3>Treatment</h3>
+      <h3>治疗方案</h3>
       <div v-if="result.treatment_plan">
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Medication</th>
-                <th>Dosage</th>
-                <th>Frequency</th>
+                <th>药物</th>
+                <th>剂量</th>
+                <th>频次</th>
               </tr>
             </thead>
             <tbody>
@@ -103,14 +103,14 @@ function text(value: unknown, fallback = "Not available"): string {
         </div>
         <p class="muted">{{ text(treatment.follow_up_plan, "") }}</p>
       </div>
-      <p v-else class="empty-state">Treatment output will appear here.</p>
+      <p v-else class="empty-state">治疗方案将在此显示。</p>
     </section>
 
     <section class="result-card">
-      <h3>Coding</h3>
+      <h3>医学编码</h3>
       <div v-if="result.coding_result" class="kv-grid">
         <div class="kv">
-          <span>Primary ICD-10</span>
+          <span>主要 ICD-10</span>
           <strong>
             {{ text((coding.primary_icd10 as Record<string, unknown>)?.code) }}
           </strong>
@@ -122,26 +122,26 @@ function text(value: unknown, fallback = "Not available"): string {
           </strong>
         </div>
       </div>
-      <p v-else class="empty-state">ICD-10 and DRG output will appear here.</p>
+      <p v-else class="empty-state">ICD-10 和 DRG 结果将在此显示。</p>
     </section>
 
     <section class="result-card">
-      <h3>HIPAA audit</h3>
+      <h3>HIPAA 审计</h3>
       <div v-if="result.audit_result" class="kv-grid">
         <div class="kv">
-          <span>Compliant</span>
+          <span>是否合规</span>
           <strong>{{ text(audit.hipaa_compliant) }}</strong>
         </div>
         <div class="kv">
-          <span>Risk level</span>
+          <span>风险等级</span>
           <strong>{{ text(audit.overall_risk_level) }}</strong>
         </div>
       </div>
-      <p v-else class="empty-state">Audit output will appear here.</p>
+      <p v-else class="empty-state">合规审计结果将在此显示。</p>
     </section>
 
     <details v-if="result.patient_info || result.diagnosis" class="result-card">
-      <summary>Raw response JSON</summary>
+      <summary>原始响应 JSON</summary>
       <JsonPreview :value="result" />
     </details>
   </div>

@@ -22,7 +22,7 @@ async function runSearch() {
     const response = await searchICD10(query.value.trim());
     results.value = response.results;
   } catch (err) {
-    error.value = err instanceof Error ? err.message : "Search failed.";
+    error.value = err instanceof Error ? err.message : "搜索失败。";
   } finally {
     isLoading.value = false;
   }
@@ -33,7 +33,7 @@ async function selectCode(code: string) {
   try {
     selected.value = await getICD10(code);
   } catch (err) {
-    error.value = err instanceof Error ? err.message : "Lookup failed.";
+    error.value = err instanceof Error ? err.message : "编码查询失败。";
   }
 }
 </script>
@@ -42,11 +42,11 @@ async function selectCode(code: string) {
   <section class="tool-grid">
     <div class="panel">
       <div class="panel-header">
-        <h2>ICD-10 search</h2>
+        <h2>ICD-10 搜索</h2>
       </div>
       <div class="panel-body form-grid">
         <div class="field">
-          <label for="icd-query">Diagnosis text</label>
+          <label for="icd-query">诊断文本</label>
           <input
             id="icd-query"
             v-model="query"
@@ -57,7 +57,7 @@ async function selectCode(code: string) {
         </div>
         <button class="button primary" type="button" :disabled="isLoading" @click="runSearch">
           <Search :size="17" />
-          {{ isLoading ? "Searching" : "Search codes" }}
+          {{ isLoading ? "搜索中" : "搜索编码" }}
         </button>
         <div v-if="error" class="alert">{{ error }}</div>
       </div>
@@ -65,15 +65,15 @@ async function selectCode(code: string) {
 
     <div class="panel">
       <div class="panel-header">
-        <h2>Matches</h2>
+        <h2>匹配结果</h2>
       </div>
       <div class="panel-body">
         <div v-if="results.length" class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Code</th>
-                <th>Description</th>
+                <th>编码</th>
+                <th>描述</th>
                 <th></th>
               </tr>
             </thead>
@@ -83,20 +83,20 @@ async function selectCode(code: string) {
                 <td>{{ result.description }}</td>
                 <td>
                   <button class="button" type="button" @click="selectCode(result.code)">
-                    Detail
+                    详情
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p v-else class="empty-state">Search results will appear here.</p>
+        <p v-else class="empty-state">搜索结果将在此显示。</p>
       </div>
     </div>
 
     <div v-if="selected" class="panel">
       <div class="panel-header">
-        <h2>Code detail</h2>
+        <h2>编码详情</h2>
       </div>
       <div class="panel-body kv-grid">
         <div class="kv">
@@ -105,15 +105,15 @@ async function selectCode(code: string) {
         </div>
         <div class="kv">
           <span>DRG</span>
-          <strong>{{ selected.drg_group?.drg_code || "Not available" }}</strong>
+          <strong>{{ selected.drg_group?.drg_code || "暂无数据" }}</strong>
         </div>
         <div class="kv">
-          <span>Description</span>
+          <span>描述</span>
           <strong>{{ selected.icd10.description }}</strong>
         </div>
         <div class="kv">
-          <span>DRG description</span>
-          <strong>{{ selected.drg_group?.description || "Not available" }}</strong>
+          <span>DRG 描述</span>
+          <strong>{{ selected.drg_group?.description || "暂无数据" }}</strong>
         </div>
       </div>
     </div>

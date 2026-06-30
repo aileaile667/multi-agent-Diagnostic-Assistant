@@ -32,7 +32,7 @@ async function runCheck() {
   try {
     response.value = await checkDDI(newDrugs.value, currentDrugs.value);
   } catch (err) {
-    error.value = err instanceof Error ? err.message : "DDI check failed.";
+    error.value = err instanceof Error ? err.message : "药物交互检查失败。";
   } finally {
     isLoading.value = false;
   }
@@ -43,20 +43,20 @@ async function runCheck() {
   <section class="tool-grid">
     <div class="panel">
       <div class="panel-header">
-        <h2>Drug interaction check</h2>
+        <h2>药物交互检查</h2>
       </div>
       <div class="panel-body form-grid">
         <div class="field">
-          <label for="new-drugs">New prescriptions</label>
+          <label for="new-drugs">新增处方</label>
           <input id="new-drugs" v-model="newDrugText" class="input" />
         </div>
         <div class="field">
-          <label for="current-drugs">Current medications</label>
+          <label for="current-drugs">当前用药</label>
           <input id="current-drugs" v-model="currentDrugText" class="input" />
         </div>
         <button class="button primary" type="button" :disabled="isLoading" @click="runCheck">
           <ShieldAlert :size="17" />
-          {{ isLoading ? "Checking" : "Check interactions" }}
+          {{ isLoading ? "检查中" : "检查交互风险" }}
         </button>
         <div v-if="error" class="alert">{{ error }}</div>
       </div>
@@ -64,13 +64,13 @@ async function runCheck() {
 
     <div class="panel">
       <div class="panel-header">
-        <h2>Safety result</h2>
+        <h2>安全性结果</h2>
         <span
           v-if="response"
           class="badge"
           :class="response.has_major_interaction ? 'danger' : 'success'"
         >
-          {{ response.interaction_count }} interactions
+          {{ response.interaction_count }} 项交互
         </span>
       </div>
       <div class="panel-body">
@@ -86,8 +86,8 @@ async function runCheck() {
             <p class="muted">{{ interaction.recommendation }}</p>
           </article>
         </div>
-        <p v-else-if="response" class="empty-state">No known interactions found.</p>
-        <p v-else class="empty-state">Run a check to see interaction details.</p>
+        <p v-else-if="response" class="empty-state">未发现已知药物交互风险。</p>
+        <p v-else class="empty-state">运行检查后将在此显示交互详情。</p>
       </div>
     </div>
   </section>

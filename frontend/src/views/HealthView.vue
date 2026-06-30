@@ -16,10 +16,14 @@ async function refresh() {
     response.value = await health();
   } catch (err) {
     response.value = null;
-    error.value = err instanceof Error ? err.message : "Health check failed.";
+    error.value = err instanceof Error ? err.message : "健康检查失败。";
   } finally {
     isLoading.value = false;
   }
+}
+
+function statusText(status: string): string {
+  return status === "healthy" ? "服务正常" : status;
 }
 
 onMounted(() => {
@@ -32,37 +36,37 @@ onMounted(() => {
     <div class="panel">
       <div class="panel-header">
         <div>
-          <h2>Backend health</h2>
-          <p class="muted">Checks the FastAPI `/health` endpoint.</p>
+          <h2>后端健康状态</h2>
+          <p class="muted">检查 FastAPI `/health` 接口。</p>
         </div>
         <button class="button" type="button" :disabled="isLoading" @click="refresh">
           <RefreshCw :size="17" />
-          Refresh
+          刷新
         </button>
       </div>
       <div class="panel-body">
         <div v-if="response" class="kv-grid">
           <div class="kv">
-            <span>Status</span>
-            <strong>{{ response.status }}</strong>
+            <span>状态</span>
+            <strong>{{ statusText(response.status) }}</strong>
           </div>
           <div class="kv">
-            <span>Service</span>
+            <span>服务</span>
             <strong>{{ response.service }}</strong>
           </div>
           <div class="kv">
-            <span>Version</span>
+            <span>版本</span>
             <strong>{{ response.version }}</strong>
           </div>
         </div>
         <div v-else-if="error" class="alert">{{ error }}</div>
-        <p v-else class="empty-state">Checking backend status.</p>
+        <p v-else class="empty-state">正在检查后端状态。</p>
       </div>
     </div>
 
     <div class="panel">
       <div class="panel-header">
-        <h2>Raw response</h2>
+        <h2>原始响应</h2>
       </div>
       <div class="panel-body">
         <JsonPreview :value="response || { error }" />
